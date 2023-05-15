@@ -1,3 +1,4 @@
+import Link from 'next/link'
 
 function MyMenu() {
     return (
@@ -9,33 +10,40 @@ function MyMenu() {
                 </div>
 
                 <div className="menu_opciones">
-
-                    <div className="menu_item">
-                        cosa B
-                    </div>
-                    <div className="menu_item">
-                        cosa B
-                    </div>
-                    <div className="menu_item">
-                        cosa B
-                    </div>
-                    <div className="menu_item">
-                        cosa B
-                    </div>
+                    <Link href="/">
+                        <div className="menu_item">
+                            Home
+                        </div>
+                    </Link>
+                    <Link href="/">
+                        <div className="menu_item">
+                            Home
+                        </div>
+                    </Link>
+                    <Link href="/">
+                        <div className="menu_item">
+                            Home
+                        </div>
+                    </Link>
+                    <Link href="/about">
+                        <div className="menu_item">
+                            Conócenos
+                        </div>
+                    </Link>
                 </div>
             </div>
             <div className="menu_bottom">
                 <div className="menu_item_bottom">
-                A
+                    A
                 </div>
                 <div className="menu_item_bottom">
-                B
+                    B
                 </div>
                 <div className="menu_item_bottom">
-                C
+                    C
                 </div>
                 <div className="menu_item_bottom">
-                D
+                    D
                 </div>
             </div>
         </>

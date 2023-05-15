@@ -21,6 +21,7 @@
     rgba(255, 255, 255, 1),
     rgba(255, 255, 255, 0)
   );
+  
 
   --tile-start-rgb: 239, 245, 249;
   --tile-end-rgb: 228, 232, 233;
@@ -131,7 +132,22 @@ height: 60px;
 background-color: #f1f1f1;
 }
   
+.menu_item{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  padding: 5px 10px;
+  cursor: pointer;
+  
 
+}
+
+.menu_item:hover{
+  background-color: #e1e1e1;
+  border-radius: 10px;
+}
 
 .menu_opciones{
   display: flex;
@@ -148,6 +164,7 @@ background-color: #f1f1f1;
   align-items: center;
   width: 100%;
   height: 100%;
+  padding: 0 10px 0 10px;
 }
 
 .footer{
@@ -158,7 +175,6 @@ background-color: #f1f1f1;
   padding: 10px 20px 10px 20px;
   align-items: center;
   height: 60px;
-  background-color: #fff;
 }
 
 .buscador{
@@ -166,28 +182,75 @@ background-color: #f1f1f1;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: blue;
+  background-color: rgb(141, 141, 141);
   width: 100%;
-  height: 50px;
+  height: 60px;
+  min-height: 60px;
+  margin: 20px 0 10px 0;
+  border-radius: 10px;
+  gap: 20px;
+  padding: 10px 20px;
+}
+.search{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  min-height: 40px;
+  border-radius: 10px;
+  gap: 20px;
+  padding: 10px 20px;
 }
 
+.search:hover{
+  background-color: rgb(99, 98, 98);
+  border-radius: 10px;
+}
+
+.selector_scroll{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 10px 0 10px 0;
+}
 .scrollX{
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 600px;
-  overflow-x: auto;
+  width: 100%;
+  overflow-x: scroll;
   overflow-y: hidden;
   padding: 10px;
-  background-color:pink;
   gap : 10px;
 }
 
 .caratulas{
   width: 120px ;
   height: 180px;
-  background-color: purple;
+  background-color: rgb(73, 46, 6);
+  min-width: 120px;
+  min-width: 120px;
+}
+
+.seccion_recomendados{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+}
+
+.contenedor_recomendados{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+  padding: 10px;
+  flex-wrap: wrap;
 }
 
 @media (prefers-color-scheme: dark) {
