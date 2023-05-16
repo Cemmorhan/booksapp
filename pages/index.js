@@ -2,6 +2,8 @@ import { Input } from 'antd';
 import { Select, Space } from 'antd';
 import { FiSearch } from "react-icons/fi";
 import Link from 'next/link';
+import Scroll from '@/components/Scroll';
+import Recomendados from '@/components/Recomendados';
 
 export default function Home() {
 
@@ -51,271 +53,24 @@ export default function Home() {
 
         </div>
         <div className="selector_scroll">
-          <div className="selector_title">
-            <h3>Más vendidos</h3>
-          </div>
-          <div className="scrollX">
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-          </div>
+          <Scroll 
+          titulo='Mas vendidos'/>
         </div>
 
         <div className="selector_scroll">
-          <div className="selector_title">
-            <h3>Ultimos añadidos</h3>
-          </div>
-          <div className="scrollX">
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-          </div>
+          <Scroll 
+          titulo='Ultimos añadidos'/>
         </div>
 
         <div className="selector_scroll">
-          <div className="selector_title">
-            <h3>Especial para tí</h3>
-          </div>
-          <div className="scrollX">
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-          </div>
+          <Scroll 
+          titulo='Especial para tí'/>
         </div>
 
 
         <div className="seccion_recomendados">
-          <div className="selector_title">
-            <h3>Recomendados</h3>
-          </div>
-          <div className="contenedor_recomendados">
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-            <div className="caratulas">
-            </div>
-
-
-          </div>
+          <Recomendados 
+          titulo='Recomendados'/>
         </div>
 
       </div >

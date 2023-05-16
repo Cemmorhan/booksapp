@@ -15,14 +15,14 @@ function MyMenu() {
                             Home
                         </div>
                     </Link>
-                    <Link href="/">
+                    <Link href="/perfil">
                         <div className="menu_item">
-                            Home
+                            Perfil
                         </div>
                     </Link>
-                    <Link href="/">
+                    <Link href="/cesta">
                         <div className="menu_item">
-                            Home
+                            Cesta
                         </div>
                     </Link>
                     <Link href="/about">
@@ -33,18 +33,26 @@ function MyMenu() {
                 </div>
             </div>
             <div className="menu_bottom">
+            <Link href="/">
                 <div className="menu_item_bottom">
                     A
                 </div>
+            </Link>
+            <Link href="/perfil">
                 <div className="menu_item_bottom">
                     B
                 </div>
+            </Link>
+            <Link href="/cesta">
                 <div className="menu_item_bottom">
                     C
                 </div>
+            </Link>
+            <Link href="/about">
                 <div className="menu_item_bottom">
                     D
                 </div>
+            </Link>
             </div>
         </>
     )
