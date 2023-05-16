@@ -4,6 +4,7 @@ function Recomendados({titulo}) {
     console.log(titulo)
     return (
         <>
+        <div className="seccion_recomendados">
         <div className="selector_title">
             <h3>{titulo}</h3>
           </div>
@@ -122,6 +123,7 @@ function Recomendados({titulo}) {
             </div>
 
 
+          </div>
           </div>
         </>
     )

@@ -52,28 +52,11 @@ export default function Home() {
         </Link>
 
         </div>
-        <div className="selector_scroll">
-          <Scroll 
-          titulo='Mas vendidos'/>
-        </div>
-
-        <div className="selector_scroll">
-          <Scroll 
-          titulo='Ultimos añadidos'/>
-        </div>
-
-        <div className="selector_scroll">
-          <Scroll 
-          titulo='Especial para tí'/>
-        </div>
-
-
-        <div className="seccion_recomendados">
-          <Recomendados 
-          titulo='Recomendados'/>
-        </div>
-
-      </div >
+          <Scroll titulo='Mas vendidos'/>
+          <Scroll titulo='Ultimos añadidos'/>
+          <Scroll titulo='Especial para tí'/>
+          <Recomendados titulo='Recomendados'/>
+        </div >
       {/*       <div className="footer">
         <h1>Esto es el footer</h1>
       </div> */}
