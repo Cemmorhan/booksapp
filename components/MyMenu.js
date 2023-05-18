@@ -1,12 +1,13 @@
 import Link from 'next/link'
+import { FiHome, FiUser, FiShoppingCart, FiMessageSquare } from "react-icons/fi";
 
 function MyMenu() {
     return (
         <>
             <div className="menu">
 
-                <div style={{ backgroundColor: "red" }}>
-                    cosa A
+                <div >
+                    Identificaté o Registrate
                 </div>
 
                 <div className="menu_opciones">
@@ -33,26 +34,26 @@ function MyMenu() {
                 </div>
             </div>
             <div className="menu_bottom">
-            <Link href="/">
-                <div className="menu_item_bottom">
-                    A
-                </div>
-            </Link>
-            <Link href="/perfil">
-                <div className="menu_item_bottom">
-                    B
-                </div>
-            </Link>
-            <Link href="/cesta">
-                <div className="menu_item_bottom">
-                    C
-                </div>
-            </Link>
-            <Link href="/about">
-                <div className="menu_item_bottom">
-                    D
-                </div>
-            </Link>
+                <Link href="/">
+                    <div className="menu_item_bottom">
+                        <FiHome />
+                    </div>
+                </Link>
+                <Link href="/perfil">
+                    <div className="menu_item_bottom">
+                        <FiUser />
+                    </div>
+                </Link>
+                <Link href="/cesta">
+                    <div className="menu_item_bottom">
+                        <FiShoppingCart />
+                    </div>
+                </Link>
+                <Link href="/about">
+                    <div className="menu_item_bottom">
+                        <FiMessageSquare />
+                    </div>
+                </Link>
             </div>
         </>
     )
