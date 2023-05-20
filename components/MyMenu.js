@@ -36,22 +36,23 @@ function MyMenu() {
             <div className="menu_bottom">
                 <Link href="/">
                     <div className="menu_item_bottom">
-                        <FiHome />
-                    </div>
-                </Link>
-                <Link href="/perfil">
-                    <div className="menu_item_bottom">
-                        <FiUser />
+                        <FiHome size={25}/>
                     </div>
                 </Link>
                 <Link href="/cesta">
                     <div className="menu_item_bottom">
-                        <FiShoppingCart />
+                        <FiShoppingCart  size={25}/>
                     </div>
                 </Link>
                 <Link href="/about">
                     <div className="menu_item_bottom">
-                        <FiMessageSquare />
+                        <FiMessageSquare  size={25}/>
+                    </div>
+                </Link>
+                
+                <Link href="/perfil">
+                    <div className="menu_item_bottom">
+                        <FiUser  size={25} />
                     </div>
                 </Link>
             </div>

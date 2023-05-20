@@ -1,7 +1,10 @@
 
+import books from '../public/books.json'
+import Caratula from './Caratula'
 
 function Scroll({ titulo }) {
   console.log(titulo)
+
   return (
     <>
       <div className="selector_scroll">
@@ -9,60 +12,17 @@ function Scroll({ titulo }) {
           <h3>{titulo}</h3>
         </div>
         <div className="scrollX">
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
-          <div className="caratulas">
-          </div>
+{
+          books.map((book) => (<Caratula book={book} />))
+          
+}
+          
+
+
         </div>
       </div>
     </>
   )
-}
-
-export async function getStaticProps() {
-  const res = await fetch('http://localhost:3000/index')
-  const titulo = await res.json()
-  return {
-    props: {
-      titulo
-    }
-  }
 }
 
 export default Scroll;

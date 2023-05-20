@@ -124,7 +124,7 @@ a {
 .menu_bottom{
 display: none;
 flex-direction: row;
-justify-content: space-evenly;
+justify-content: space-around;
 width: 100%;
 padding: 10px;
 align-items: center;
@@ -132,6 +132,14 @@ height: 60px;
 background-color: #f1f1f1;
 }
   
+.menu_item_bottom{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+
+}
+
 .menu_item{
   display: flex;
   flex-direction: row;
@@ -140,9 +148,9 @@ background-color: #f1f1f1;
   height: 40px;
   padding: 5px 10px;
   cursor: pointer;
-  
 
 }
+
 
 .menu_item:hover{
   background-color: #e1e1e1;
@@ -224,14 +232,25 @@ background-color: #f1f1f1;
   overflow-x: scroll;
   overflow-y: hidden;
   padding: 10px;
-  gap : 10px;
+  gap : 30px;
 }
-
 .caratulas{
   width: 120px ;
   height: 180px;
   background-color: rgb(73, 46, 6);
   min-width: 120px;
+}
+
+.caratula{
+  width: 0px ;
+  height: 280px;
+  min-width: 200px;
+}
+.caratula_img{
+  width: 100%;
+  height: 100%;
+  object-fit: auto;
+  border-radius: 10px;
 }
 
 .seccion_recomendados{
@@ -245,7 +264,7 @@ background-color: #f1f1f1;
 .contenedor_recomendados{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
   gap: 20px;
   padding: 10px;
@@ -254,52 +273,30 @@ background-color: #f1f1f1;
 .contenedor_carrito{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  min-width: 100%;
+  justify-content: flex-start;
+  width: 100%;
   gap: 10px;
   padding: 10px;
   flex-wrap: wrap;
-  background-color: rgb(245, 108, 104);
 }
 .articulos_carrito{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: flex; 
+  flex-direction: row;
   min-width: 600px;
-  padding: 10px;
-  flex-wrap: wrap;
-  flex-grow: 1;
-  background-color: rgba(1, 65, 255, 0.3);
+  flex-grow: 999;
+  background-color: blue;
 }
 .compra_carrito{
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 300px;
   min-width: 300px;
-  padding: 10px;
   flex-wrap: wrap;
-  background-color: rgb(40, 212, 63);
+  background-color: rgb(73, 46, 6);
+  flex-grow: 1;
 }
 .total_carrito{
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   width: 100%;
   gap: 10px;
-  padding: 10px;
-  flex-wrap: wrap;
-  background-color: rgb(100, 40, 212);
-}
-.recomendados_vertical{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  gap: 10px;
-  padding: 10px;
-  flex-wrap: wrap;
-  background-color: rgb(90, 83, 124);
 }
 
 
@@ -309,8 +306,7 @@ background-color: #f1f1f1;
   }
 }
 
-@media (max-width: 500px
-) {
+@media (max-width: 500px) {
   .menu_bottom{
     display: flex;
     position: fixed;
@@ -326,7 +322,6 @@ background-color: #f1f1f1;
   .caratulas{
     width: 95px ;
     height: 160px;
-    background-color: rgb(73, 46, 6);
     min-width: 95px;
   }
 }

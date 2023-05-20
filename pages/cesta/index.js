@@ -1,4 +1,4 @@
-import Scroll from '@/components/Scroll';
+import Scroll from "@/components/Scroll"
 
 export default function Cesta() {
     return (
@@ -11,9 +11,6 @@ export default function Cesta() {
                 <div className="compra_carrito">
                     <div className="total_carrito">
                         <h1>Total</h1>
-                    </div>
-                    <div className="recomendados_vertical">
-                        <h1>Recomendados</h1>
                     </div>
                 </div>
             </div>
