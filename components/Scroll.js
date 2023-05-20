@@ -13,7 +13,7 @@ function Scroll({ titulo }) {
         </div>
         <div className="scrollX">
 {
-          books.map((book) => (<Caratula book={book} />))
+          books.map((book,index) => (<Caratula book={book} key={index}/>))
           
 }
           
