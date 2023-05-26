@@ -1,7 +1,6 @@
 
 
 function Recomendados({ titulo }) {
-  console.log(titulo)
   return (
     <>
       <div className="seccion_recomendados">
@@ -129,14 +128,5 @@ function Recomendados({ titulo }) {
   )
 }
 
-export async function getStaticProps() {
-  const res = await fetch('http://localhost:3000/api/recomendados')
-  const titulo = await res.json()
-  return {
-    props: {
-      titulo
-    }
-  }
-}
 
 export default Recomendados;

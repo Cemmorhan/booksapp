@@ -9,31 +9,25 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 
-  --primary-glow: conic-gradient(
-    from 180deg at 50% 50%,
-    #16abff33 0deg,
-    #0885ff33 55deg,
-    #54d6ff33 120deg,
-    #0071ff33 160deg,
-    transparent 360deg
-  );
-  --secondary-glow: radial-gradient(
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
-  
+  --primary-glow: conic-gradient(from 180deg at 50% 50%,
+      #16abff33 0deg,
+      #0885ff33 55deg,
+      #54d6ff33 120deg,
+      #0071ff33 160deg,
+      transparent 360deg);
+  --secondary-glow: radial-gradient(rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 0));
+
 
   --tile-start-rgb: 239, 245, 249;
   --tile-end-rgb: 228, 232, 233;
-  --tile-border: conic-gradient(
-    #00000080,
-    #00000040,
-    #00000030,
-    #00000020,
-    #00000010,
-    #00000010,
-    #00000080
-  );
+  --tile-border: conic-gradient(#00000080,
+      #00000040,
+      #00000030,
+      #00000020,
+      #00000010,
+      #00000010,
+      #00000080);
 
   --callout-rgb: 238, 240, 241;
   --callout-border-rgb: 172, 175, 176;
@@ -48,24 +42,20 @@
     --background-end-rgb: 0, 0, 0;
 
     --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-    --secondary-glow: linear-gradient(
-      to bottom right,
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0.3)
-    );
+    --secondary-glow: linear-gradient(to bottom right,
+        rgba(1, 65, 255, 0),
+        rgba(1, 65, 255, 0),
+        rgba(1, 65, 255, 0.3));
 
     --tile-start-rgb: 2, 13, 46;
     --tile-end-rgb: 2, 5, 19;
-    --tile-border: conic-gradient(
-      #ffffff80,
-      #ffffff40,
-      #ffffff30,
-      #ffffff20,
-      #ffffff10,
-      #ffffff10,
-      #ffffff80
-    );
+    --tile-border: conic-gradient(#ffffff80,
+        #ffffff40,
+        #ffffff30,
+        #ffffff20,
+        #ffffff10,
+        #ffffff10,
+        #ffffff80);
 
     --callout-rgb: 20, 20, 20;
     --callout-border-rgb: 108, 108, 108;
@@ -84,17 +74,13 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  padding: 0px 0px 60px 0px;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 a {
@@ -103,14 +89,14 @@ a {
 }
 
 
-.mainContainer{
+.mainContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100vh;
 }
 
-.menu{
+.menu {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -119,21 +105,22 @@ a {
   align-items: center;
   height: 60px;
   background-color: #f1f1f1;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.menu_bottom{
-display: none;
-flex-direction: row;
-justify-content: space-around;
-width: 100%;
-padding: 10px;
-align-items: center;
-height: 60px;
-background-color: #f1f1f1;
+.menu_bottom {
+  display: none;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  padding: 10px;
+  align-items: center;
+  height: 60px;
+  background-color: #f1f1f1;
+
 }
-  
-.menu_item_bottom{
+
+.menu_item_bottom {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -141,7 +128,7 @@ background-color: #f1f1f1;
 
 }
 
-.menu_item{
+.menu_item {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -153,12 +140,12 @@ background-color: #f1f1f1;
 }
 
 
-.menu_item:hover{
+.menu_item:hover {
   background-color: #e1e1e1;
   border-radius: 10px;
 }
 
-.menu_opciones{
+.menu_opciones {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -167,16 +154,15 @@ background-color: #f1f1f1;
   gap: 20px;
 }
 
-.content{
+.content {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 0px 10px 0px 10px;
 }
 
-.footer{
+.footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -186,7 +172,7 @@ background-color: #f1f1f1;
   height: 60px;
 }
 
-.buscador{
+.buscador {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -200,7 +186,8 @@ background-color: #f1f1f1;
   gap: 20px;
   padding: 10px 20px;
 }
-.search{
+
+.search {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -213,18 +200,19 @@ background-color: #f1f1f1;
   padding: 10px 20px;
 }
 
-.search:hover{
+.search:hover {
   background-color: rgb(99, 98, 98);
   border-radius: 10px;
 }
 
-.selector_scroll{
+.selector_scroll {
   display: flex;
   flex-direction: column;
   width: 100%;
   margin: 10px 0 10px 0;
 }
-.scrollX{
+
+.scrollX {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -233,28 +221,30 @@ background-color: #f1f1f1;
   overflow-x: scroll;
   overflow-y: hidden;
   padding: 10px;
-  gap : 30px;
+  gap: 30px;
 }
-.caratulas{
-  width: 120px ;
+
+.caratulas {
+  width: 120px;
   height: 180px;
   background-color: rgb(73, 46, 6);
   min-width: 120px;
 }
 
-.caratula{
-  width: 0px ;
+.caratula {
+  width: 0px;
   height: 280px;
   min-width: 200px;
 }
-.caratula_img{
+
+.caratula_img {
   width: 100%;
   height: 100%;
   object-fit: auto;
   border-radius: 10px;
 }
 
-.seccion_recomendados{
+.seccion_recomendados {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -262,7 +252,7 @@ background-color: #f1f1f1;
   gap: 10px;
 }
 
-.contenedor_recomendados{
+.contenedor_recomendados {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -271,7 +261,8 @@ background-color: #f1f1f1;
   padding: 10px;
   flex-wrap: wrap;
 }
-.contenedor_carrito{
+
+.contenedor_carrito {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -280,26 +271,92 @@ background-color: #f1f1f1;
   padding: 10px;
   flex-wrap: wrap;
 }
-.articulos_carrito{
-  display: flex; 
+
+.articulos_carrito {
+  display: flex;
   flex-direction: row;
   min-width: 600px;
   flex-grow: 999;
   background-color: blue;
 }
-.compra_carrito{
+
+.compra_carrito {
   display: flex;
   min-width: 300px;
   flex-wrap: wrap;
   background-color: rgb(73, 46, 6);
   flex-grow: 1;
 }
-.total_carrito{
+
+.total_carrito {
   display: flex;
   width: 100%;
   gap: 10px;
 }
 
+.content_item {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 10px;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+.titulo_item {
+  display: flex;
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.ficha_item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 10px;
+  padding: 10px;
+  background-color: gray;
+}
+
+.imagen_item {
+  display: flex;
+  min-width: 500px;
+  gap: 10px;
+  padding: 10px;
+}
+
+.datos_item {
+  display: flex;
+  flex-direction: column;
+  min-width: 500px;
+  gap: 10px;
+  padding: 10px;
+  background-color: rgb(147, 140, 243);
+}
+
+.descripcion_item {
+  display: flex;
+  gap: 10px;
+  padding: auto;
+  background-color: red;
+}
+
+.botones_item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 10px;
+  background-color: yellow;
+}
+
+.boton_item {
+  display: flex;
+  padding: 10px;
+  gap: 10px;
+  background-color: pink;
+}
 
 @media (prefers-color-scheme: dark) {
   html {
@@ -308,20 +365,23 @@ background-color: #f1f1f1;
 }
 
 @media (max-width: 500px) {
-  .menu_bottom{
+  .menu_bottom {
     display: flex;
     position: fixed;
     bottom: 0;
   }
-  .menu_opciones{
+
+  .menu_opciones {
     display: none;
   }
-  .menu{
+
+  .menu {
     justify-content: center;
     align-items: center;
   }
-  .caratulas{
-    width: 95px ;
+
+  .caratulas {
+    width: 95px;
     height: 160px;
     min-width: 95px;
   }

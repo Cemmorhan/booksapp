@@ -2,7 +2,6 @@
 import Scroll from '@/components/Scroll';
 import Recomendados from '@/components/Recomendados';
 import Buscador from '@/components/Buscador';
-import Caratula from '@/components/Caratula';
 
 export default function Home() {
 
