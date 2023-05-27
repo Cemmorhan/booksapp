@@ -308,21 +308,23 @@ a {
   width: 100%;
   border-radius: 10px;
   padding: 10px;
+  justify-content: center;
 }
 
 .ficha_item {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   width: 100%;
-  gap: 10px;
+  gap: 20px;
   padding: 10px;
-  background-color: gray;
+    flex-wrap: wrap;
+
 }
 
 .imagen_item {
   display: flex;
-  min-width: 500px;
+  width: 500px;
   gap: 10px;
   padding: 10px;
 }
@@ -330,10 +332,9 @@ a {
 .datos_item {
   display: flex;
   flex-direction: column;
-  min-width: 500px;
+  width: 700px;
   gap: 10px;
   padding: 10px;
-  background-color: rgb(147, 140, 243);
 }
 
 .descripcion_item {

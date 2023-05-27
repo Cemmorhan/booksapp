@@ -1,8 +1,6 @@
-
-import books from '../public/books.json'
 import Caratula from './Caratula'
 
-function Scroll({ titulo }) {
+function Scroll({ titulo, books }) {
 
   return (
     <>
