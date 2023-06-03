@@ -30,8 +30,6 @@ export default withPageAuthRequired(function Home(props) {
     });
     setBooks(books);
   };
-
-  
   return (
     <>
         <div className="content">
