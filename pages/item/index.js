@@ -1,11 +1,11 @@
-import Objeto from "@/components/Objeto";
-import Scroll from "@/components/Scroll";
+import Objeto from "../../components/Objeto";
+import Scroll from "../../components/Scroll";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
 export default function Item() {
-
+    const [itembook, setItembook] = useState([]);
     const [books, setBooks] = useState([]);
     const [isbn, setIsbn] = useState("0");
 
@@ -13,11 +13,12 @@ export default function Item() {
 
     useEffect(() => {
         setIsbn(router.query.isbn)
-    }, []);
+    }, [router.query.isbn]);
 
     useEffect(() => {
         console.log(isbn);
         getbooks();
+        getonebookbyisbn();
     }, [isbn]);
 
     useEffect(() => {
@@ -25,6 +26,18 @@ export default function Item() {
     }, [books]);
 
     const getbooks = async () => {
+        const send = { books_id: "0" }
+        const results = await fetch("/api/getbooks", {
+          method: "POST",
+          body: JSON.stringify(send),
+        }).then((response) => response.json());
+        const books = results.map((result) => {
+          return { ...result }
+        });
+        setBooks(books);
+      };
+
+    const getonebookbyisbn = async () => {
         if (isbn === undefined) {
             return;
         }
@@ -39,12 +52,12 @@ export default function Item() {
         const books = results.map((result) => {
             return { ...result }
         });
-        setBooks(books);
+        setItembook(books);
     };
 
     return (
         <div className="content">
-            <Objeto books={books}/>
+            {itembook.length>0?<Objeto books={itembook}/>:<h2>No se encuentra el libro</h2>}
             <Scroll books={books} titulo='Vistos recientemente' />
         </div>
 

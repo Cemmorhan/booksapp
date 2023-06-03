@@ -21,7 +21,7 @@ function Objeto({books}) {
                     <img src={isDefined && books[0].image} className="caratula_img" alt=''/>
                     </div>
                     <div className="datos_item">
-                        <div classname="descripcion_item">
+                        <div className="descripcion_item">
                         <h2>{isDefined && books[0].title}</h2>
                             <h3>{isDefined && books[0].summary}</h3>
                             

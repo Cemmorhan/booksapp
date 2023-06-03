@@ -8,6 +8,10 @@ console.log("getonebook");
     console.log(request.body)
     /* transform boy from json to object */
     const body = JSON.parse(request.body);
+    if (body.isbn === undefined) {
+        response.json([]);
+        return;
+    }
     const isbn = body.isbn;
     console.log(isbn);
     const books = await database
