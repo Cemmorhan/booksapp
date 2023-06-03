@@ -6,6 +6,7 @@ import Link from 'next/link';
 function Buscador() {
     const handleChange = (value) => {
         console.log(`selected ${value}`);
+        
       };
     return (
         <>
