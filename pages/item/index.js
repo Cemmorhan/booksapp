@@ -16,8 +16,6 @@ export default function Item() {
     }, [books]);
 
     const getbooks = async () => {
-        /* 
-            const send = { books_id: "0"} */
         const send = { books_id: "0" }
         const results = await fetch("/api/getbooks", {
             method: "POST",
@@ -31,8 +29,8 @@ export default function Item() {
 
     return (
         <div className="content">
-            <Objeto />
-            <Scroll titulo='Vistos recientemente' />
+            <Objeto books={books}/>
+            <Scroll books={books} titulo='Vistos recientemente' />
         </div>
 
 

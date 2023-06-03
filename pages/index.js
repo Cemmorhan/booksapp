@@ -10,39 +10,34 @@ export default function Home() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-      getbooks();
+    getbooks();
   }, []);
 
   useEffect(() => {
-      console.log(books);
+    console.log(books);
   }, [books]);
 
   const getbooks = async () => {
-      /* 
-          const send = { books_id: "0"} */
-      const send = { books_id: "0" }
-      const results = await fetch("/api/getbooks", {
-          method: "POST",
-          body: JSON.stringify(send),
-      }).then((response) => response.json());
-      const books = results.map((result) => {
-          return { ...result }
-      });
-      setBooks(books);
+    const send = { books_id: "0" }
+    const results = await fetch("/api/getbooks", {
+      method: "POST",
+      body: JSON.stringify(send),
+    }).then((response) => response.json());
+    const books = results.map((result) => {
+      return { ...result }
+    });
+    setBooks(books);
   };
 
   return (
     <>
-      <div className="content">
-        <Buscador />
-        <Scroll books={books} titulo='Mas vendidos' />
-        <Scroll books={books} titulo='Ultimos añadidos' />
-        <Scroll books={books} titulo='Especial para tí' />
-        <Recomendados titulo='Recomendados' />
-      </div >
-      {/*       <div className="footer">
-        <h1>Esto es el footer</h1>
-      </div> */}
+        <div className="content">
+          <Buscador />
+          <Scroll books={books} titulo='Mas vendidos' />
+          <Scroll books={books} titulo='Ultimos añadidos' />
+          <Scroll books={books} titulo='Especial para tí' />
+          <Recomendados titulo='Recomendados' />
+        </div >
     </>
   )
 }
