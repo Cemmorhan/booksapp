@@ -5,7 +5,9 @@ import Buscador from '@/components/Buscador';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-export default function Home() {
+import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
+
+export default withPageAuthRequired(function Home(props) {
 
   const [books, setBooks] = useState([]);
 
@@ -40,4 +42,4 @@ export default function Home() {
         </div >
     </>
   )
-}
+})

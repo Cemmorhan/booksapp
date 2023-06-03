@@ -3,12 +3,17 @@ function Caratula(props) {
 
     return (
 
-        
-            <div className="caratula">
-                <Link href="/item">
+
+        <div className="caratula">
+            <Link 
+            href={{
+                pathname: "/item",
+                query: { isbn: props.book.isbn }
+            }}
+            >
                 <img src={props.book.image} className="caratula_img" alt="" />
-                </Link>
-            </div>
+            </Link>
+        </div>
 
     )
 
