@@ -1,8 +1,9 @@
 import Scroll from "@/components/Scroll"
 import { useEffect } from "react";
 import { useState } from "react";
+import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 
-export default function Cesta() {
+export default withPageAuthRequired( function Cesta() {
     
     const [books, setBooks] = useState([]);
 
@@ -48,4 +49,4 @@ export default function Cesta() {
 
         </>
     )
-}
+});
