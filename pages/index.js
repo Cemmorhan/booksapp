@@ -8,6 +8,10 @@ import { useState } from 'react';
 export default function Home(props) {
 
   const [books, setBooks] = useState([]);
+  const [topventas, setTopventas] = useState([]);
+  
+  const [recientes, setRecientes] = useState([]);
+
   useEffect(() => {
     getbooks();
   }, []);
@@ -25,7 +29,6 @@ export default function Home(props) {
     });
     setBooks(books);
   };
-  const [topventas, setTopventas] = useState([]);
   useEffect(() => {
     gettopventas();
   }, []);
@@ -43,7 +46,6 @@ export default function Home(props) {
     });
     setTopventas(topventas);
   };
-  const [recientes, setRecientes] = useState([]);
   useEffect(() => {
     getrecientes();
   }, []);
@@ -63,13 +65,13 @@ export default function Home(props) {
   };
   return (
     <>
-        <div className="content">
-          <Buscador />
-          <Scroll books={topventas} titulo='Mas vendidos' />
-          <Scroll books={recientes} titulo='Ultimos añadidos' />
-          <Scroll books={books} titulo='Especial para tí' />
-          <Recomendados titulo='Recomendados' />
-        </div >
+      <div className="content">
+        <Buscador />
+        <Scroll books={topventas} titulo='Mas vendidos' />
+        <Scroll books={recientes} titulo='Ultimos añadidos' />
+        <Scroll books={books} titulo='Especial para tí' />
+        <Recomendados titulo='Recomendados' />
+      </div >
     </>
   )
 }
