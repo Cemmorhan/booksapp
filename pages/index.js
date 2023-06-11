@@ -14,10 +14,13 @@ export default function Home(props) {
 
   useEffect(() => {
     getbooks();
+    gettopventas();
   }, []);
+  
   useEffect(() => {
     console.log(books);
   }, [books]);
+
   const getbooks = async () => {
     const send = { books_id: "0" }
     const results = await fetch("/api/getbooks", {
@@ -29,9 +32,6 @@ export default function Home(props) {
     });
     setBooks(books);
   };
-  useEffect(() => {
-    gettopventas();
-  }, []);
   useEffect(() => {
     console.log(topventas);
   }, [topventas]);
