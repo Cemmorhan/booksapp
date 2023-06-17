@@ -27,114 +27,22 @@ export default async function handler(request, response) {
             .collection("users")
             .insertOne({
                 user_id: user_id,
-                name: "name",
-                email: "email",
-                phone: "phone",
-                address: "address",
-                city: "city",
-                state: "state",
-                zip: "zip",
-                country: "country",
-                card: "card",
+                name: "",
+                lastname: "",
+                email: "",
+                phone: "",
+                address: "",
+                city: "",
+                state: "",
+                zip: "",
+                country: "",
+                card: "",
+                saldo: 0,
                 cart: {
-                    items: [
-                        {
-                            isbn: "isbn",
-                            qty: "qty"
-                        },
-                        {
-                            isbn: "isbn",
-                            qty: "qty"
-                        }
-                    ]
-                },
-                monedero: {
-                    saldo: 0,
+                    items: []
                 },
                 historial: {
-                    compras: [
-                        {
-                            id: "id1",
-                            date: "date",
-                            total: "total",
-                            estado: "entregado",
-                            items: [
-                                {
-                                    id: "id",
-                                    title: "title",
-                                    price: "price",
-                                    qty: "qty",
-                                    total: "total",
-                                    isbn: "isbn"
-                                },
-                                {
-                                    id: "id",
-                                    title: "title",
-                                    price: "price",
-                                    qty: "qty",
-                                    total: "total",
-                                    isbn: "isbn"
-                                }
-                            ]
-
-                        },
-                        {
-                            id: "id2",
-                            date: "date",
-                            total: "total",
-                            estado: "en tránsito",
-                            items: [
-                                {
-                                    id: "id",
-                                    title: "title",
-                                    price: "price",
-                                    qty: "qty",
-                                    total: "total",
-                                    isbn: "isbn"
-                                },
-                                {
-                                    id: "id",
-                                    title: "title",
-                                    price: "price",
-                                    qty: "qty",
-                                    total: "total",
-                                    isbn: "isbn"
-
-                                }]
-                        }
-                    ],
-                    ventas: [
-                        {
-                            id: "id1",
-                            date: "date",
-                            total: "total",
-                            estado: "pendiente",
-                            items: [
-                                {
-                                    id: "id",
-                                    title: "title",
-                                    price: "price",
-                                    qty: "qty",
-                                    total: "total",
-                                    isbn: "isbn"
-                                }]
-                        },
-                        {
-                            id: "id2",
-                            date: "date",
-                            total: "total",
-                            estado: "vendido",
-                            items: [
-                                {
-                                    id: "id",
-                                    title: "title",
-                                    price: "price",
-                                    qty: "qty",
-                                    total: "total",
-                                    isbn: "isbn"
-                                }]
-                        }
-                    ]
+                    compras: []
 
                 },
             });
