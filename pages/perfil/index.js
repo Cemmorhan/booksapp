@@ -5,6 +5,18 @@ import { Descriptions } from 'antd';
 import Ventas from "@/components/Ventas";
 import { useEffect } from 'react';
 import { useState } from 'react';
+import {
+    Button,
+    Cascader,
+    DatePicker,
+    Form,
+    Input,
+    InputNumber,
+    Radio,
+    Select,
+    Switch,
+    TreeSelect,
+  } from 'antd';
 
 export default withPageAuthRequired(function Perfil() {
     const { user, error, isLoading } = useUser();
@@ -30,9 +42,10 @@ export default withPageAuthRequired(function Perfil() {
         const send = {
             user_id: user.sub,
             set: {
-                monedero:{phone: "myphone"}
+                monedero: { phone: "myphone" }
             },
-            push: {"historial.compras": {
+            push: {
+                "historial.compras": {
                     id: "id3",
                     fecha: "fecha3",
                     precio: "precio3",
@@ -40,7 +53,7 @@ export default withPageAuthRequired(function Perfil() {
                     url: "url3",
                 }
             },
-            inc: {saldo: 1200}
+            inc: { saldo: 1200 }
 
         };
         const results = await fetch("/api/updateuser", {
@@ -52,6 +65,38 @@ export default withPageAuthRequired(function Perfil() {
         });
         setUserDB(newResults);
     };
+    const App = () => {
+        const [componentSize, setComponentSize] = useState('default');
+        const onFormLayoutChange = ({ size }) => {
+          setComponentSize(size);
+        };
+        return (
+          <Form
+            labelCol={{
+              span: 4,
+            }}
+            wrapperCol={{
+              span: 14,
+            }}
+            layout="horizontal"
+            initialValues={{
+              size: componentSize,
+            }}
+            onValuesChange={onFormLayoutChange}
+            size={componentSize}
+            style={{
+              maxWidth: 600,
+            }}
+          >
+            <Form.Item label="Input">
+              <Input />
+            </Form.Item>
+            <Form.Item label="Button">
+              <Button onClick={updateCajon} >subir cajon</Button>
+            </Form.Item>
+          </Form>
+        );
+      };
 
 
     const items = [
@@ -79,9 +124,12 @@ export default withPageAuthRequired(function Perfil() {
         {
             key: '3',
             label: `Ventas`,
-            children: <Ventas></Ventas>,
+            children: <Ventas ></Ventas>,
         },
     ];
+    function updateCajon() {
+
+    }
 
     function setSaldo() {
         console.log("setSaldo");
@@ -110,7 +158,10 @@ export default withPageAuthRequired(function Perfil() {
                     <Tabs defaultActiveKey="1" items={items} size="large" />
                 </div>
                 <button onClick={setSaldo}>Subir saldo</button>
-            </div>
+                <App></App>
+
+
+            </div >
         </>
     );
 });
