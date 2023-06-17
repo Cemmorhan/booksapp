@@ -7,15 +7,8 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import {
     Button,
-    Cascader,
-    DatePicker,
     Form,
     Input,
-    InputNumber,
-    Radio,
-    Select,
-    Switch,
-    TreeSelect,
     Modal,
     message
 } from 'antd';
@@ -32,7 +25,7 @@ export default withPageAuthRequired(function Perfil() {
             label: `Perfil`,
             children:
                 <Descriptions title="User Info">
-                    <Descriptions.Item ><img src={userDB.picture} alt=""></img></Descriptions.Item>
+                    <Descriptions.Item ><img src={user.picture} alt=""></img></Descriptions.Item>
                     <Descriptions.Item label="UserName">{userDB.name}</Descriptions.Item>
                     <Descriptions.Item label="Correo">{userDB.email}</Descriptions.Item>
                     <Descriptions.Item label="userDB">{userDB.user_id}</Descriptions.Item>
@@ -161,11 +154,12 @@ export default withPageAuthRequired(function Perfil() {
             <div className="content">
                 <div className="tabsperfil">
                     <Tabs defaultActiveKey="1" items={items} size="large" />
+                    
                 </div>
-                <button onClick={setSaldo}>Subir saldo</button>
-                <br></br>
                 <Button type="primary" onClick={showModal}>
                     Editar perfil      </Button>
+                <button onClick={setSaldo}>Subir saldo</button>
+                <br></br>
                 <Modal title="Editar perfil"
                     open={isModalOpen}
                     onOk={handleOk}
