@@ -154,10 +154,11 @@ export default withPageAuthRequired(function Perfil() {
             <div className="content">
                 <div className="tabsperfil">
                     <Tabs defaultActiveKey="1" items={items} size="large" />
-                    
-                </div>
-                <Button type="primary" onClick={showModal}>
+                    <div className='tabsbotton'>
+                    <Button type="primary" onClick={showModal}>
                     Editar perfil      </Button>
+                    </div>
+                </div>
                 <button onClick={setSaldo}>Subir saldo</button>
                 <br></br>
                 <Modal title="Editar perfil"
