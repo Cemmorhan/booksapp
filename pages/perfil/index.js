@@ -151,7 +151,6 @@ export default withPageAuthRequired(function Perfil() {
             <div className="content">
                 <div className="tabsperfil">
                     <Tabs defaultActiveKey="1" items={items} size="large" />
-                    <br></br>
                     <div className='tabsbotton'>
                         <Button type="primary" onClick={showModal}>
                             Editar perfil      </Button>
@@ -168,7 +167,6 @@ export default withPageAuthRequired(function Perfil() {
 
                     width={800}
                 >
-                    <br></br>
                     <Form
 
                         name="basic"

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FiHome, FiUser, FiShoppingCart, FiMessageSquare } from "react-icons/fi";
+import { FiHome, FiUser, FiShoppingCart, FiMessageSquare, FiDollarSign } from "react-icons/fi";
 
 function MyMenu() {
     return (
@@ -29,9 +29,9 @@ function MyMenu() {
                             Cesta
                         </div>
                     </Link>
-                    <Link href="/about">
+                    <Link href="/sell">
                         <div className="menu_item">
-                            Conócenos
+                            vender
                         </div>
                     </Link>
                 </div>
@@ -47,13 +47,13 @@ function MyMenu() {
                         <FiShoppingCart size={25} />
                     </div>
                 </Link>
-                <Link href="/about">
+                <Link href="/vender">
                     <div className="menu_item_bottom">
-                        <FiMessageSquare size={25} />
+                        <FiDollarSign size={25} />
                     </div>
                 </Link>
 
-                <Link href="/perfil">
+                <Link href="/sell">
                     <div className="menu_item_bottom">
                         <FiUser size={25} />
                     </div>
