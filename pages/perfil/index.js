@@ -26,13 +26,10 @@ export default withPageAuthRequired(function Perfil() {
             children:
                 <Descriptions title="User Info">
                     <Descriptions.Item ><img src={user.picture} alt=""></img></Descriptions.Item>
-                    <Descriptions.Item label="UserName">{userDB.name}</Descriptions.Item>
+                    <Descriptions.Item label="Nombre de usuario">{userDB.nickname}</Descriptions.Item>
+                    <Descriptions.Item label="Nombre">{userDB.name} {userDB.lastname}  </Descriptions.Item>
                     <Descriptions.Item label="Correo">{userDB.email}</Descriptions.Item>
-                    <Descriptions.Item label="userDB">{userDB.user_id}</Descriptions.Item>
-                    <Descriptions.Item label="Remark">empty</Descriptions.Item>
-                    <Descriptions.Item label="Address">
-                        No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
-                    </Descriptions.Item>
+                    <Descriptions.Item label="Address">{userDB.address}  {userDB.zip}  {userDB.city}  {userDB.state}  {userDB.country}</Descriptions.Item>
                 </Descriptions>
             ,
         },
@@ -50,7 +47,7 @@ export default withPageAuthRequired(function Perfil() {
 
     const getUsers = async () => {
         if (!user) return;
-        const send = { user_id: user.sub };
+        const send = { user_id: user.sub, user_email: user.name };
         const results = await fetch("/api/getuser", {
             method: "POST",
             body: JSON.stringify(send),
@@ -109,7 +106,7 @@ export default withPageAuthRequired(function Perfil() {
         updateUsers({ set: values });
         setIsModalOpen(false);
         successMessage();
-        
+
 
 
     };
@@ -135,16 +132,16 @@ export default withPageAuthRequired(function Perfil() {
     // messages
     const [messageApi, contextHolder] = message.useMessage();
     const successMessage = () => {
-      messageApi.open({
-        type: 'success',
-        content: 'This is a success message',
-      });
+        messageApi.open({
+            type: 'success',
+            content: 'This is a success message',
+        });
     };
     const errorMessage = () => {
-      messageApi.open({
-        type: 'error',
-        content: 'This is an error message',
-      });
+        messageApi.open({
+            type: 'error',
+            content: 'This is an error message',
+        });
     };
 
 
@@ -154,9 +151,10 @@ export default withPageAuthRequired(function Perfil() {
             <div className="content">
                 <div className="tabsperfil">
                     <Tabs defaultActiveKey="1" items={items} size="large" />
+                    <br></br>
                     <div className='tabsbotton'>
-                    <Button type="primary" onClick={showModal}>
-                    Editar perfil      </Button>
+                        <Button type="primary" onClick={showModal}>
+                            Editar perfil      </Button>
                     </div>
                 </div>
                 <button onClick={setSaldo}>Subir saldo</button>
@@ -166,7 +164,7 @@ export default withPageAuthRequired(function Perfil() {
                     onOk={handleOk}
                     onCancel={handleCancel}
                     footer={null}
-                    
+
 
                     width={800}
                 >
@@ -196,13 +194,29 @@ export default withPageAuthRequired(function Perfil() {
                         onFinishFailed={onFinishFailed}
                         autoComplete="off"
                     >
+
+
+                        <Form.Item
+                            label="Nombre de usuario"
+                            name="nickname"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: '¡Por favor, introduzca su nombre de usuario!',
+                                },
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
+
+
                         <Form.Item
                             label="Nombre"
                             name="name"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your username!',
+                                    message: '¡Por favor, introduzca su nombre!',
                                 },
                             ]}
                         >
@@ -215,7 +229,7 @@ export default withPageAuthRequired(function Perfil() {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your apellido!',
+                                    message: '¡Por favor, introduzca su apellido!',
                                 },
                             ]}
                         >
@@ -228,7 +242,7 @@ export default withPageAuthRequired(function Perfil() {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your address!',
+                                    message: '¡Por favor, introduzca su direccion de residencia!',
                                 },
                             ]}
                         >
@@ -242,7 +256,7 @@ export default withPageAuthRequired(function Perfil() {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your country!',
+                                    message: '¡Por favor, introduzca su país de residencia!',
                                 },
                             ]}
                         >
@@ -256,7 +270,7 @@ export default withPageAuthRequired(function Perfil() {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your state!',
+                                    message: '¡Por favor, introduzca su comunidad autonoma de residencia!',
                                 },
                             ]}
                         >
@@ -270,7 +284,7 @@ export default withPageAuthRequired(function Perfil() {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your city!',
+                                    message: '¡Por favor, introduzca su ciudad de residencia!',
                                 },
                             ]}
                         >
@@ -285,7 +299,7 @@ export default withPageAuthRequired(function Perfil() {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your zip!',
+                                    message: '¡Por favor, introduzca su codigo postal!',
                                 },
                             ]}
                         >
@@ -293,12 +307,12 @@ export default withPageAuthRequired(function Perfil() {
                         </Form.Item>
 
                         <br></br>
-                        <div style={{display:"flex", justifyContent:"right", alignItems:"center"}}>
-                        <Form.Item>
-                            <Button type="primary" htmlType="submit">
-                                Submit
-                            </Button>
-                        </Form.Item>
+                        <div style={{ display: "flex", justifyContent: "right", alignItems: "center" }}>
+                            <Form.Item>
+                                <Button type="primary" htmlType="submit">
+                                    Submit
+                                </Button>
+                            </Form.Item>
                         </div>
                     </Form>
                 </Modal>

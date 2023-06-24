@@ -13,10 +13,11 @@ export default async function handler(request, response) {
         return;
     }
     const user_id = body.user_id;
+    const user_email = body.user_email;
     console.log(user_id);
     const user = await database
         .collection("users")
-        .find({ user_id: user_id })
+        .find({ user_id: user_id , email: user_email })
         .limit(1)
         .toArray();
     console.log(user);
@@ -27,9 +28,10 @@ export default async function handler(request, response) {
             .collection("users")
             .insertOne({
                 user_id: user_id,
+                nickname: "",
                 name: "",
                 lastname: "",
-                email: "",
+                email: user_email,
                 phone: "",
                 address: "",
                 city: "",
