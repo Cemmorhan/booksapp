@@ -8,23 +8,30 @@ function BuscadorApi(props) {
     const [search, setSearch] = useState("");
 
     const getBooks = async () => {
-        const results = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${search}`, {
+        const results = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${search}&maxResults=40`, {
             method: "GET",
         }).then((response) => response.json());
         if (results.items === undefined) {
             return;
         }
         const books = results.items.map((result, index) => {
+            console.log("cada libro",result)
             const key = index;
             const id = result.id;
             const title = result.volumeInfo.subtitle != undefined ? result.volumeInfo.title + " " + result.volumeInfo.subtitle : result.volumeInfo.title;
             const author = result.volumeInfo.authors;
             const language = result.volumeInfo.language;
             const description = result.volumeInfo.description;
-            const filtrado = result.volumeInfo.industryIdentifiers.filter((isbn) => isbn.type === "ISBN_13");
+            const filtrado = Array.isArray(result.volumeInfo.industryIdentifiers)? result.volumeInfo.industryIdentifiers.filter((isbn) => isbn.type === "ISBN_13"):[];
             const isbn = filtrado.length > 0 ? filtrado[0].identifier : undefined;
-
-            return { key, id, title, author, language, description, isbn }
+            const year= result.volumeInfo.publisherDate;
+            const pages=result.volumeInfo.pageCount;
+            const genre=result.volumeInfo.categories;
+            const publisher=result.volumeInfo.publisher;
+            const raw=result;
+            const image=Array.isArray(result.volumeInfo.imageLinks)?result.volumeInfo.imageLinks.thumbnail:result.volumeInfo.imageLinks;
+console.log("isbn", isbn, filtrado)
+            return { key, id, title, author, language, description, isbn , year, pages, genre, publisher, raw, image}
         });
 
         const booksfiltered = books.filter((book) => book.isbn != undefined);
@@ -86,7 +93,7 @@ function BuscadorApi(props) {
                         ]}
                     />
 
-                    <div className="search" style={{ width: "60px" }} onClick={buscar}>
+                    <div className="search" style={{ width: "80px" }} onClick={buscar}>
                         <FiSearch size={30} color='white' />
                     </div>
                 </div>

@@ -308,7 +308,7 @@ export default withPageAuthRequired(function Perfil() {
                         <div style={{ display: "flex", justifyContent: "right", alignItems: "center" }}>
                             <Form.Item>
                                 <Button type="primary" htmlType="submit">
-                                    Submit
+                                    Guardar cambios
                                 </Button>
                             </Form.Item>
                         </div>
