@@ -47,13 +47,13 @@ function MyMenu() {
                         <FiShoppingCart size={25} />
                     </div>
                 </Link>
-                <Link href="/vender">
+                <Link href="/sell">
                     <div className="menu_item_bottom">
                         <FiDollarSign size={25} />
                     </div>
                 </Link>
 
-                <Link href="/sell">
+                <Link href="/perfil">
                     <div className="menu_item_bottom">
                         <FiUser size={25} />
                     </div>
