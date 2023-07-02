@@ -11,7 +11,7 @@ function Caratula(props) {
                 query: { isbn: props.book.isbn }
             }}
             >
-                <img src={props.book.image.smallThumbnail} className="caratula_img" alt="" />
+                <img src={props.book.image.thumbnail} className="caratula_img" alt="" />
             </Link>
         </div>
 
