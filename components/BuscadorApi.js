@@ -30,7 +30,6 @@ function BuscadorApi(props) {
             const publisher=result.volumeInfo.publisher;
             const raw=result;
             const image=Array.isArray(result.volumeInfo.imageLinks)?result.volumeInfo.imageLinks.thumbnail:result.volumeInfo.imageLinks;
-console.log("isbn", isbn, filtrado)
             return { key, id, title, author, language, description, isbn , year, pages, genre, publisher, raw, image}
         });
 

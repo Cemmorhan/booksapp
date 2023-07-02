@@ -1,6 +1,7 @@
 import BuscadorApi from "@/components/BuscadorApi"
 import { Divider, Radio, Table } from 'antd';
 import { useEffect, useState } from 'react';
+import { message, Button} from 'antd';
 
 
 export default function About() {
@@ -66,6 +67,14 @@ console.log("selectedbokinsidegetbook",book)
     function Venta () {
         getBook();
     }
+    // Mensajes
+    const [messageApi, contextHolder] = message.useMessage();
+  const success = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'This is a success message',
+    });
+  };
 
 
     return (
@@ -100,9 +109,9 @@ console.log("selectedbokinsidegetbook",book)
 
             </div>
             <div style={{ display: "flex", justifyContent: "right", alignItems: "center" }}>
-            <button type="primary" onClick={Venta}>
-                Confirmar venta.
-            </button>
+            <Button type="primary" onClick={Venta}>
+                Confirmar libro.
+            </Button>
             </div>
             
         </div>

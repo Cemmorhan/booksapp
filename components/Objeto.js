@@ -27,12 +27,12 @@ function Objeto({ books }) {
                             <h5>{isDefined && books[0].isbn}</h5>
                             <h4>{isDefined && books[0].genre}</h4>
                             <h3>Sinopsis de {isDefined && books[0].title}:</h3>
-                            <p>{isDefined && books[0].summary}</p>
+                            <p>{isDefined && books[0].description}</p>
 
                         </div>
                         <div className="botones_item">
                             <div className="boton_item">
-                                <h3>Disponibles:</h3>
+                                <h3>En venta: {books[0].cantidad}</h3>
                             </div>
                             <button /*onClick={añadirCesta}*/ className="boton_item">
                                 Añadir a la cesta

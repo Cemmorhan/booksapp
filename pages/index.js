@@ -23,7 +23,7 @@ export default function Home(props) {
 
   const getbooks = async () => {
     const send = { books_id: "0" }
-    const results = await fetch("/api/getbook", {
+    const results = await fetch("/api/getbooks", {
       method: "POST",
       body: JSON.stringify(send),
     }).then((response) => response.json());
