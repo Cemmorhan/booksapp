@@ -15,9 +15,8 @@ import {
 
 
 
-export default withPageAuthRequired(function Perfil() {
+export default withPageAuthRequired(function Perfil(props) {
     const { user, error, isLoading } = useUser();
-    const [userDB, setUserDB] = useState([]);
     const [renderizado, setRenderizado] = useState(false);
     const items = [
         {
@@ -26,10 +25,10 @@ export default withPageAuthRequired(function Perfil() {
             children:
                 <Descriptions title="User Info">
                     <Descriptions.Item ><img src={user.picture} alt=""></img></Descriptions.Item>
-                    <Descriptions.Item label="Nombre de usuario">{userDB.nickname}</Descriptions.Item>
-                    <Descriptions.Item label="Nombre">{userDB.name} {userDB.lastname}  </Descriptions.Item>
-                    <Descriptions.Item label="Correo">{userDB.email}</Descriptions.Item>
-                    <Descriptions.Item label="Address">{userDB.address}  {userDB.zip}  {userDB.city}  {userDB.state}  {userDB.country}</Descriptions.Item>
+                    <Descriptions.Item label="Nombre de usuario">{props.usuarioAdquirido.nickname}</Descriptions.Item>
+                    <Descriptions.Item label="Nombre">{props.usuarioAdquirido.name} {props.usuarioAdquirido.lastname}  </Descriptions.Item>
+                    <Descriptions.Item label="Correo">{props.usuarioAdquirido.email}</Descriptions.Item>
+                    <Descriptions.Item label="Address">{props.usuarioAdquirido.address}  {props.usuarioAdquirido.zip}  {props.usuarioAdquirido.city}  {props.usuarioAdquirido.state}  {props.usuarioAdquirido.country}</Descriptions.Item>
                 </Descriptions>
             ,
         },
@@ -44,7 +43,7 @@ export default withPageAuthRequired(function Perfil() {
             children: <Ventas ></Ventas>,
         },
     ];
-
+    //metodo post para recuperar datos o crear usuario
     const getUsers = async () => {
         if (!user) return;
         const send = { user_id: user.sub, user_email: user.name };
@@ -55,9 +54,9 @@ export default withPageAuthRequired(function Perfil() {
         const newResults = results.map((result) => {
             return { ...result }
         });
-        setUserDB(newResults[0]);
+        props.setUsuarioAdquirido(newResults[0]);
     };
-
+    //actualizar datos usuario
     const updateUsers = async (values) => {
         if (!user) return;
         const send = {
@@ -66,7 +65,6 @@ export default withPageAuthRequired(function Perfil() {
             push: values.push === undefined ? {} : values.push,
             inc: values.inc === undefined ? {} : values.inc,
         };
-        console.log(send);
         const results = await fetch("/api/updateuser", {
             method: "POST",
             body: JSON.stringify(send),
@@ -74,7 +72,7 @@ export default withPageAuthRequired(function Perfil() {
         const newResults = results.map((result) => {
             return { ...result }
         });
-        setUserDB(newResults);
+        props.setUsuarioAdquirido(newResults);
     };
 
     function setSaldo() {
@@ -93,8 +91,8 @@ export default withPageAuthRequired(function Perfil() {
     }, [renderizado]);
 
     useEffect(() => {
-        console.log(userDB);
-    }, [userDB]);
+        console.log(props.usuarioAdquirido);
+    }, [props.usuarioAdquirido]);
 
 
 
@@ -176,13 +174,13 @@ export default withPageAuthRequired(function Perfil() {
                         initialValues=
                         {
                             {
-                                name: userDB.name,
-                                lastname: userDB.lastname,
-                                address: userDB.address,
-                                city: userDB.city,
-                                country: userDB.country,
-                                state: userDB.state,
-                                zip: userDB.zip,
+                                name: props.usuarioAdquirido.name,
+                                lastname: props.usuarioAdquirido.lastname,
+                                address: props.usuarioAdquirido.address,
+                                city: props.usuarioAdquirido.city,
+                                country: props.usuarioAdquirido.country,
+                                state: props.usuarioAdquirido.state,
+                                zip: props.usuarioAdquirido.zip,
 
 
 

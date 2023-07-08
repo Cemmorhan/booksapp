@@ -14,7 +14,7 @@ function Objeto({ books }) {
         <>
             <div className="content_item">
                 <div className="ficha_item">
-                    <div className="imagen_item">
+                    <div className="imagen_item" style={{objectFit:"scale-down"}}>
                         <img src={isDefined && books[0].image.thumbnail} className="caratula_img" alt='' />
                     </div>
                     <div className="datos_item">

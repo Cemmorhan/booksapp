@@ -9,7 +9,6 @@ export default function Home(props) {
 
   const [books, setBooks] = useState([]);
   const [topventas, setTopventas] = useState([]);
-  
   const [recientes, setRecientes] = useState([]);
 
   useEffect(() => {
@@ -63,6 +62,7 @@ export default function Home(props) {
     });
     setRecientes(recientes);
   };
+  
   return (
     <>
       <div className="content">

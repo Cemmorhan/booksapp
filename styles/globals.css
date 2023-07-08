@@ -245,7 +245,7 @@ a {
 .caratula_img {
   width: 100%;
   height: 100%;
-  object-fit: auto;
+  object-fit: scale-down;
   border-radius: 10px;
 }
 
@@ -311,8 +311,8 @@ a {
 .titulo_item {
   display: flex;
   width: 100%;
-  height: 80px;
-  border-radius: 10px;
+/*   height: 80px;
+ */  border-radius: 10px;
   padding: 10px;
   justify-content: center;
 }

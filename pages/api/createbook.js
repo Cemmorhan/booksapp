@@ -1,12 +1,9 @@
-
 import { connectToDatabase } from "../../lib/mongodb"
 
 
 export default async function handler(request, response) {
 
-    console.log("getbook");
     const { database } = await connectToDatabase()
-    console.log("book",request.body)
     /* transform boy from json to object */
     const body = JSON.parse(request.body);
     if (body.book_id === undefined) {
@@ -15,27 +12,30 @@ export default async function handler(request, response) {
     }
     const book_id = body.book_id;
     const book_title = body.title;
-    const book_author=body.author;
-    const book_language=body.language;
-    const book_description=body.description;
-    const book_isbn=body.isbn;
-    const book_year=body.year;
-    const book_pages=body.pages;
-    const book_genre=body.genre;
-    const book_publisher=body.publisher;
-    const book_image=body.image;
-    const raw=body.raw;
+    const book_author = body.author;
+    const book_language = body.language;
+    const book_description = body.description;
+    const book_isbn = body.isbn;
+    const book_year = body.year;
+    const book_pages = body.pages;
+    const book_genre = body.genre;
+    const book_publisher = body.publisher;
+    const book_image = body.image;
+    const raw = body.raw;
 
-    console.log(book_id);
+
+    const book_user = body.user;
+    const book_price = 20.5;
+    const book_updatedate = 1276912123;
+    const book_selldate = 21312342141;
+    const book_state = "vendido";
+
     const book = await database
         .collection("books")
-        .find({book_id: book_id})
+        .find({ book_id: book_id })
         .limit(1)
         .toArray();
-    console.log(book);
-    if (book.length > 0) {
-        response.json(book);
-    } else {
+    if (book.length === 0) {
         let book = await database
             .collection("books")
             .insertOne({
@@ -53,8 +53,19 @@ export default async function handler(request, response) {
                 cantidad: 0,
                 raw: raw,
             });
-        response.json([book]);
 
     }
-    
+    const bookenventa = await database
+        .collection("historial")
+        .insertOne({
+            book_id: book_id,
+            isbn: book_isbn,
+            user: book_user,
+            price: book_price,
+            updatedate: book_updatedate,
+            selldate: book_selldate,
+            state: book_state,
+        });
+    response.json([bookenventa])
+
 }
