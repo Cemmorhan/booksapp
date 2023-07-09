@@ -3,19 +3,21 @@ import { withPageAuthRequired, useUser } from '@auth0/nextjs-auth0/client';
 import BuscadorApi from "@/components/BuscadorApi"
 import { Divider, Radio, Table } from 'antd';
 import { useEffect, useState } from 'react';
-import { message, Button } from 'antd';
+import { message, Button, Modal } from 'antd';
 import { useFileSystemPublicRoutes } from '@/next.config';
+import  ObjetoModal  from "../../components/ObjetoModal";
 
 
 export default withPageAuthRequired(function sell(props) {
     const { user, error, isLoading } = useUser();
     const [renderizado, setRenderizado] = useState(false);
     const [databooks, setDatabooks] = useState([]);
-    const [book, setBook] = useState([]);
+    const [book, setBook] = useState(undefined);
     const [booksMyDB, setBooksMyDB] = useState([]);
     const [booksInTable, setBooksInTable] = useState([]);
     const [showMoreBooks, setShowMoreBooks] = useState(false);
-    
+    const [modaldata, setModaldata] = useState([]);
+
 
 
     const columns = [
@@ -35,24 +37,8 @@ export default withPageAuthRequired(function sell(props) {
     ];
 
     // rowSelection object indicates the need for row selection
-    const rowSelection = {
-        onChange: (selectedRowKeys, selectedRows) => {
-            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-            setBook(selectedRows[0]);
-        },
-
-    };
-
-    const rowSelectionDB = {
-        onChange: (selectedRowKeys, selectedRows) => {
-            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-            setBook(selectedRows[0]);
-        },
-
-    };
-
     const rowSeletionTable = {
-        
+
         book,
         onChange: (selectedRowKeys, selectedRows) => {
             console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
@@ -60,7 +46,6 @@ export default withPageAuthRequired(function sell(props) {
         },
 
     };
-
     // Guardar libros mongo
     const getBook = async () => {
         console.log("selectedbokinsidegetbook", book)
@@ -126,25 +111,22 @@ export default withPageAuthRequired(function sell(props) {
             const bookskey1 = booksShown.map((result, index) => { return { ...result, key: index } });
             setBooksInTable(bookskey1);
         }
-        else if(renderizado && !showMoreBooks) {
+        else if (renderizado && !showMoreBooks) {
             const bookskey2 = booksMyDB.map((result, index) => { return { ...result, key: index } });
             setBooksInTable(bookskey2);
         }
 
     }, [renderizado, showMoreBooks, databooks, booksMyDB]);
-
-
-
-    useEffect(() => {
-        console.log("booksMyDB", booksMyDB);
-        console.log("dataBooks", databooks);
-        console.log("booksInTable", booksInTable);
-    }, [booksMyDB, databooks, booksInTable]);
-
+useEffect(() => {
+    if (renderizado) {  
+        setModaldata(book!=undefined?<ObjetoModal books={[book]}></ObjetoModal>:<h2>No se encuentra el libro</h2>)
+    }
+}, [renderizado,book]);
 
     // Venta
     function Venta() {
-        getBook();
+        //getBook();
+        showModal();
     }
     function showMore() {
         setShowMoreBooks(true);
@@ -158,9 +140,19 @@ export default withPageAuthRequired(function sell(props) {
             content: 'This is a success message',
         });
     };
- useEffect(() => {
-    console.log("rowselection", rowSeletionTable)
-    }, [rowSeletionTable])
+
+    // mensaje modal
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
 
     return (
         <>
@@ -171,7 +163,7 @@ export default withPageAuthRequired(function sell(props) {
 
                     {booksInTable.length > 0 ? <Table
 
-style={{ width: "100%" }}
+                        style={{ width: "100%" }}
                         rowSelection={{
                             type: "radio",
                             ...rowSeletionTable,
@@ -212,6 +204,17 @@ style={{ width: "100%" }}
                         Mostrar
                     </Button>
                 </div> : null}
+                <Modal title="Es este tu libro? Véndelo!"
+                    open={isModalOpen}
+                    onOk={handleOk}
+                    onCancel={handleCancel}
+                    footer={null}
+
+
+                    width={800}
+                >
+                    {modaldata}
+                </Modal>
 
                 <div style={{ display: "flex", justifyContent: "right", alignItems: "center" }}>
                     <Button type="primary" onClick={Venta}>

@@ -25,7 +25,7 @@ export default async function handler(request, response) {
 
 
     const book_user = body.user;
-    const book_price = 20.5;
+    const book_price = 12;
     const book_updatedate = 1276912123;
     const book_selldate = 21312342141;
     const book_state = "vendido";
