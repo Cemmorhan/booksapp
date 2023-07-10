@@ -7,7 +7,7 @@ function ObjetoModal({books}){
         if (books !== undefined && books.length > 0) {
             setIsDefined(true)
         } else {
-            setIsDefined(false)
+            setIsDefined(false) 
         }
     }, [books]) 
 
