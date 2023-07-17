@@ -10,14 +10,21 @@ import  ObjetoModal  from "../../components/ObjetoModal";
 
 
 export default withPageAuthRequired(function sell(props) {
+    const { user, error, isLoading } = useUser();
+    const [renderizado, setRenderizado] = useState(false);
+    const [databooks, setDatabooks] = useState([]);
+    const [book, setBook] = useState(undefined);
+    const [booksMyDB, setBooksMyDB] = useState([]);
+    const [booksInTable, setBooksInTable] = useState([]);
+    const [showMoreBooks, setShowMoreBooks] = useState(false);
+    const [modaldata, setModaldata] = useState([]);
 
 
 
     return (
-        <div>
-            hola
-        </div>
-
+       <div>
+        holav
+       </div>
 
 
     )
