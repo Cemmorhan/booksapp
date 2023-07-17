@@ -21,7 +21,7 @@ function ObjetoModal({books}){
                     <div className="datos_item">
                         <div className="descripcion_item">
                             <div className="titulo_item">
-                                <h1>{isDefined && books[0].title}</h1>
+                                <h1>{isDefined && books[0].title}</h1> 
                             </div>
 
                             <h2>{isDefined && books[0].author}</h2>
