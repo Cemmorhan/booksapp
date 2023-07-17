@@ -1,5 +1,5 @@
 
-import { withPageAuthRequired, useUser } from '@auth0/nextjs-auth0/client';
+import { withPageAuthRequired} from '@auth0/nextjs-auth0/client';
 import BuscadorApi from "@/components/BuscadorApi"
 import { Divider, Radio, Table } from 'antd';
 import { useEffect, useState } from 'react';
@@ -9,7 +9,7 @@ import  ObjetoModal  from "../../components/ObjetoModal";
 
 
 export default withPageAuthRequired(function sell(props) {
-    const { user, error, isLoading } = useUser();
+    const { user, error, isLoading } = useState();
     const [renderizado, setRenderizado] = useState(false);
     const [databooks, setDatabooks] = useState([]);
     const [book, setBook] = useState(undefined);
