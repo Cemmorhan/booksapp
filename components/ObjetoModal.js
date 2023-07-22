@@ -53,9 +53,7 @@ function ObjetoModal({ books, enviarPrecio }) {
                             <h4>Precio de venta</h4>
                                 <InputNumber
                                     defaultValue={10.50}
-                                    addonAfter="€" style={{
-                                        width: 90,
-                                      }}
+                                    addonAfter="€" style={{width: 110}}
                                     onChange={precio}
                                 />
                             <Button type="primary" onClick={() => enviarPrecio(precioLibro, vendible) }>
