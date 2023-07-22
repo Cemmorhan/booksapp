@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
-import { InputNumber, Space } from 'antd';
+import { InputNumber} from 'antd';
 import { Button } from 'antd';
 function ObjetoModal({ books, enviarPrecio }) {
     const [isDefined, setIsDefined] = useState(false)
     const [vendible, setVendible] = useState([false])
     const [precioLibro, setPrecioLibro] = useState(0)
+
 
     //definir precio del libro
     const precio = (value) => {
@@ -52,8 +53,9 @@ function ObjetoModal({ books, enviarPrecio }) {
                             <h4>Precio de venta</h4>
                                 <InputNumber
                                     defaultValue={10.50}
-                                    formatter={(value) => ` ${value} €`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                    parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+                                    addonAfter="€" style={{
+                                        width: 90,
+                                      }}
                                     onChange={precio}
                                 />
                             <Button type="primary" onClick={() => enviarPrecio(precioLibro, vendible) }>
