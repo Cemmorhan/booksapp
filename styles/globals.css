@@ -355,7 +355,6 @@ a {
   flex-direction: row;
   justify-content: flex-end;
   gap: 10px;
-  background-color: yellow;
 }
 
 .boton_item {

@@ -1,27 +1,44 @@
 import { useState, useEffect } from 'react'
-function ObjetoModal({books}){
+import { InputNumber, Space } from 'antd';
+import { Button } from 'antd';
+function ObjetoModal({ books, enviarPrecio }) {
     const [isDefined, setIsDefined] = useState(false)
+    const [vendible, setVendible] = useState([false])
+    const [precioLibro, setPrecioLibro] = useState(0)
 
-     useEffect(() => {
-        console.log("booksinsideobject",books)
+    //definir precio del libro
+    const precio = (value) => {
+        console.log('changed', value);
+        if (value > 0) {
+            setPrecioLibro(value)
+            setVendible(true)
+        } else {
+            setPrecioLibro(0)
+            setVendible(false)
+        }
+    };
+    //mirar si books esta definido
+
+    useEffect(() => {
+        console.log("booksinsideobject", books)
         if (books !== undefined && books.length > 0) {
             setIsDefined(true)
         } else {
-            setIsDefined(false) 
+            setIsDefined(false)
         }
-    }, [books]) 
+    }, [books])
 
     return (
         <>
             <div className="content_item">
-                 <div className="ficha_item">
-                    <div className="imagen_item" style={{objectFit:"scale-down"}}>
+                <div className="ficha_item">
+                    <div className="imagen_item" style={{ objectFit: "scale-down" }}>
                         <img src={isDefined && books[0].image.thumbnail} className="caratula_img" alt='' />
                     </div>
                     <div className="datos_item">
                         <div className="descripcion_item">
                             <div className="titulo_item">
-                                <h1>{isDefined && books[0].title}</h1> 
+                                <h1>{isDefined && books[0].title}</h1>
                             </div>
 
                             <h2>{isDefined && books[0].author}</h2>
@@ -32,18 +49,19 @@ function ObjetoModal({books}){
 
                         </div>
                         <div className="botones_item">
-                            <div className="boton_item">
-                                <h3>En venta: {books[0].cantidad}</h3>
-                            </div>
-                            <button className="boton_item">
-                                Añadir a la cesta
-                            </button>
-                            <div className="boton_item">
-                                <h3>Comprar</h3>
-                            </div>
+                            <h4>Precio de venta</h4>
+                                <InputNumber
+                                    defaultValue={10.50}
+                                    formatter={(value) => ` ${value} €`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                    parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+                                    onChange={precio}
+                                />
+                            <Button type="primary" onClick={() => enviarPrecio(precioLibro, vendible) }>
+                                vender
+                            </Button>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
         </>
     )

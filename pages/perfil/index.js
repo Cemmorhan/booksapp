@@ -84,7 +84,7 @@ export default withPageAuthRequired(function Perfil(props) {
         setRenderizado(true);
     }, []);
 
-    useEffect(() => {
+    useEffect(() => {setIsModalOpen
         if (renderizado) {
             getUsers();
         }

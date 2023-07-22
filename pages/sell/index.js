@@ -5,7 +5,7 @@ import { Divider, Radio, Table } from 'antd';
 import { useEffect, useState } from 'react';
 import { message, Button, Modal } from 'antd';
 import { useFileSystemPublicRoutes } from '@/next.config';
-import  ObjetoModal  from "../../components/ObjetoModal";
+import ObjetoModal from "../../components/ObjetoModal";
 
 
 export default withPageAuthRequired(function Sell(props) {
@@ -17,8 +17,9 @@ export default withPageAuthRequired(function Sell(props) {
     const [booksInTable, setBooksInTable] = useState([]);
     const [showMoreBooks, setShowMoreBooks] = useState(false);
     const [modaldata, setModaldata] = useState([]);
-
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [book_price, setBook_price] = useState(0);
+    const [comprobante, setComprobante] = useState(false);
 
     const columns = [
         {
@@ -46,6 +47,29 @@ export default withPageAuthRequired(function Sell(props) {
         },
 
     };
+
+    //recibir precio del modal
+    const enviarPrecio = (precio, vendible) => {
+        console.log("es vendible?", vendible);
+        console.log("precio sell", precio);
+        setBook_price(precio);
+        setComprobante(vendible);
+    };
+
+    useEffect(() => {
+        if (book_price > 0) {
+            console.log("precio book price", book_price);
+            console.log("comprobante", comprobante);
+        }
+    }, [book_price]);
+    useEffect(() => {
+        if (comprobante && book_price > 0) {
+            getBook();
+            success();
+            setIsModalOpen(false);
+        }
+    }, [comprobante, book_price]);
+
     // Guardar libros mongo
     const getBook = async () => {
         console.log("selectedbokinsidegetbook", book)
@@ -64,11 +88,11 @@ export default withPageAuthRequired(function Sell(props) {
             image: book.image,
             raw: book.raw,
             user: user,
-            /*
             price: book_price,
-            updatedate: book_updatedate,
-            selldate: book_selldate,
-            state: book_state*/
+            /*
+updatedate: book_updatedate,
+selldate: book_selldate,
+state: book_state*/
         };
 
         console.log("cosas que envío", send)
@@ -117,11 +141,11 @@ export default withPageAuthRequired(function Sell(props) {
         }
 
     }, [renderizado, showMoreBooks, databooks, booksMyDB]);
-useEffect(() => {
-    if (renderizado) {  
-        setModaldata(book!=undefined?<ObjetoModal books={[book]}></ObjetoModal>:<h2>No se encuentra el libro</h2>)
-    }
-}, [renderizado,book]);
+    useEffect(() => {
+        if (renderizado) {
+            setModaldata(book != undefined ? <ObjetoModal books={[book]} enviarPrecio={enviarPrecio} ></ObjetoModal> : <h2>No se encuentra el libro</h2>)
+        }
+    }, [renderizado, book,]);
 
     // Venta
     function Venta() {
@@ -137,12 +161,11 @@ useEffect(() => {
     const success = () => {
         messageApi.open({
             type: 'success',
-            content: 'This is a success message',
+            content: '¡Libro puesto en venta con exito!',
         });
     };
 
     // mensaje modal
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const showModal = () => {
         setIsModalOpen(true);
     };

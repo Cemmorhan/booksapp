@@ -26,9 +26,6 @@ function Scroll({ titulo, books }) {
             isDefined && books.map((book, index) => (<Caratula book={book} key={index} />))
             }
 
-
-
-
         </div>
       </div>
     </>
