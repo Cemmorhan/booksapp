@@ -34,7 +34,7 @@ function ObjetoModal({ books, enviarPrecio }) {
             <div className="content_item">
                 <div className="ficha_item">
                     <div className="imagen_item" style={{ objectFit: "scale-down" }}>
-                        <img src={isDefined && books[0].image.thumbnail} className="caratula_img" alt='' />
+                        <img src={isDefined && books[0].image.thumbnail != undefined ? books[0].image.thumbnail : "Imagen"} className="caratula_img" alt='' />
                     </div>
                     <div className="datos_item">
                         <div className="descripcion_item">
@@ -52,7 +52,7 @@ function ObjetoModal({ books, enviarPrecio }) {
                         <div className="botones_item">
                             <h4>Precio de venta</h4>
                                 <InputNumber
-                                    defaultValue={10.50}
+                                    defaultValue={0}
                                     addonAfter="€" style={{width: 110}}
                                     onChange={precio}
                                 />

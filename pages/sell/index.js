@@ -36,6 +36,9 @@ export default withPageAuthRequired(function Sell(props) {
             dataIndex: 'language',
         }
     ];
+    // fecha de puesta en venta
+    const book_updatedate = new Date();
+
 
     // rowSelection object indicates the need for row selection
     const rowSeletionTable = {
@@ -75,7 +78,7 @@ export default withPageAuthRequired(function Sell(props) {
         console.log("selectedbokinsidegetbook", book)
         if (!book) return;
         const send = {
-            book_id: book.id,
+            book_id: book.book_id,
             title: book.title,
             author: book.author,
             language: book.language,
@@ -89,10 +92,7 @@ export default withPageAuthRequired(function Sell(props) {
             raw: book.raw,
             user: user,
             price: book_price,
-            /*
-updatedate: book_updatedate,
-selldate: book_selldate,
-state: book_state*/
+            updatedate: book_updatedate,
         };
 
         console.log("cosas que envío", send)
@@ -227,7 +227,15 @@ state: book_state*/
                         Mostrar
                     </Button>
                 </div> : null}
-                <Modal title="Es este tu libro? Véndelo!"
+
+                <div style={{ display: "flex", justifyContent: "right", alignItems: "center" }}>
+                    <Button type="primary" onClick={Venta}>
+                        vender
+                    </Button>
+                </div>
+            </div>
+            
+            <Modal title="Es este tu libro? Véndelo!"
                     open={isModalOpen}
                     onOk={handleOk}
                     onCancel={handleCancel}
@@ -238,13 +246,6 @@ state: book_state*/
                 >
                     {modaldata}
                 </Modal>
-
-                <div style={{ display: "flex", justifyContent: "right", alignItems: "center" }}>
-                    <Button type="primary" onClick={Venta}>
-                        vender
-                    </Button>
-                </div>
-            </div>
         </>
 
 

@@ -26,9 +26,9 @@ export default async function handler(request, response) {
 
     const book_user = body.user;
     const book_price = body.price;
-    const book_updatedate = 1276912123;
-    const book_selldate = 21312342141;
-    const book_state = "vendido";
+    const book_updatedate = body.updatedate;
+    const book_selldate = null;
+    const book_state = "en venta";
 
     const book = await database
         .collection("books")
@@ -50,7 +50,7 @@ export default async function handler(request, response) {
                 genre: book_genre,
                 publisher: book_publisher,
                 image: book_image,
-                cantidad: 0,
+                cantidad: 1,
                 raw: raw,
             });
 

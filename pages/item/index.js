@@ -8,6 +8,7 @@ export default function Item() {
     const [itembook, setItembook] = useState([]);
     const [books, setBooks] = useState([]);
     const [isbn, setIsbn] = useState("0");
+    const [itembookHistorial, setItembookHistorial] = useState([]);
 
     const router = useRouter();
 
@@ -19,6 +20,7 @@ export default function Item() {
         console.log(isbn);
         getbooks();
         getonebookbyisbn();
+        gethistorial();
     }, [isbn]);
 
     useEffect(() => {
@@ -54,10 +56,29 @@ export default function Item() {
         });
         setItembook(books);
     };
+    //buscar libros historial
+    const gethistorial = async () => {
+        if (isbn === undefined) {
+            return;
+        }
+        if (isbn === "0") {
+            return;
+        }
+        const send = { isbn: isbn }
+        const results = await fetch("/api/gethistorial", {
+            method: "POST",
+            body: JSON.stringify(send),
+        }).then((response) => response.json());
+        const books = results.map((result) => {
+            return { ...result }
+        });
+        setItembookHistorial(books);
+    };
+
 
     return (
         <div className="content">
-            {itembook.length>0?<Objeto books={itembook}/>:<h2>No se encuentra el libro</h2>}
+            {itembook.length>0?<Objeto books={itembook} itembookHistorial={itembookHistorial} />:<h2>No se encuentra el libro</h2>}
             <Scroll books={books} titulo='Vistos recientemente' />
         </div>
 

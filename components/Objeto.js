@@ -1,6 +1,33 @@
 import { useState, useEffect } from 'react'
-function Objeto({ books }) {
+import { Select } from 'antd';
+function Objeto({ books, itembookHistorial }) {
     const [isDefined, setIsDefined] = useState(false)
+    const [options, setOptions] = useState([])
+    const [cantidad, setCantidad] = useState(0)
+
+    //cosas select
+    const onChange = (value) => {
+        console.log(`selected ${value}`);
+    };
+    useEffect(() => {
+        if (itembookHistorial !== undefined && itembookHistorial.length > 0) {
+            setCantidad(itembookHistorial.length)
+            setOptions(itembookHistorial.map((bookshistorial, index) => {
+                return { 
+                    value: bookshistorial._id, 
+                    label: bookshistorial.envio != undefined ? bookshistorial.price + " €" + " + " + bookshistorial.envio + " € de envío" : bookshistorial.price, 
+                    key: index, 
+                }
+            }
+            ))
+        }else{
+            setCantidad(0)
+        }
+    }, [itembookHistorial])
+
+    useEffect(() => {
+        console.log("options", options)
+    }, [options])
 
     useEffect(() => {
         if (books !== undefined && books.length > 0) {
@@ -10,12 +37,16 @@ function Objeto({ books }) {
         }
     }, [books])
 
+
+
+
+
     return (
         <>
             <div className="content_item">
                 <div className="ficha_item">
-                    <div className="imagen_item" style={{objectFit:"scale-down"}}>
-                        <img src={isDefined && books[0].image.thumbnail} className="caratula_img" alt='' />
+                    <div className="imagen_item" style={{ objectFit: "scale-down" }}>
+                        <img src={isDefined && books[0].image.thumbnail != undefined ? books[0].image.thumbnail : "Imagen"} className="caratula_img" alt='' />
                     </div>
                     <div className="datos_item">
                         <div className="descripcion_item">
@@ -31,12 +62,17 @@ function Objeto({ books }) {
 
                         </div>
                         <div className="botones_item">
-                            <div className="boton_item">
-                                <h3>En venta: {books[0].cantidad}</h3>
+                            <div className="boton_item" >
+                                <h3>En venta: <span style={{color:cantidad>0?"green":"red"}}>{cantidad}</span></h3>
                             </div>
-                            <button /*onClick={añadirCesta}*/ className="boton_item">
-                                Añadir a la cesta
-                            </button>
+                            <Select
+                                style={{ width: 200 }}
+                                showSearch
+                                placeholder="Opciones"
+                                onChange={onChange}
+                                options={options}
+                            />
+
                             <div className="boton_item">
                                 <h3>Comprar</h3>
                             </div>
