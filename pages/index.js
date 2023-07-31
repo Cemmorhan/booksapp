@@ -1,6 +1,6 @@
 import Scroll from '@/components/Scroll';
 import Recomendados from '@/components/Recomendados';
-import Buscador from '@/components/Buscador';
+import Buscadorredireccion from '@/components/Buscadorredireccion';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
@@ -12,6 +12,7 @@ export default function Home(props) {
   const [topventas, setTopventas] = useState([]);
   const [booksEnVenta, setBooksEnVenta] = useState([]);
   const [recientes, setRecientes] = useState([]);
+  const [recientes2, setRecientes2] = useState([]);
 
   useEffect(() => {
     getbooks();
@@ -52,6 +53,20 @@ export default function Home(props) {
     });
     setBookhistorial(books);
   };
+  // metodo getrecientes (libros en venta ordenados por fecha de actualizacion)
+  const getrecientes = async () => {
+    const send = { isbn: recientes2}
+    console.log("send", send);
+    const results = await fetch("/api/getrecientes", {
+      method: "POST",
+      body: JSON.stringify(send),
+    }).then((response) => response.json());
+    const books = results.map((result) => {
+      return { ...result }
+    });
+    setRecientes(books);
+  };
+  
   // devuelve libros en venta (filtrando libros de la base de datos con los del historial en venta)
   useEffect(() => {
     if (bookhistorial !== undefined && bookhistorial.length > 0 && books !== undefined && books.length > 0) {
@@ -61,31 +76,45 @@ export default function Home(props) {
           return { ...book }
         }
       });
-      const books3 = result.filter((book) => book !== undefined);
-      console.log("books en venta", books3);
-      setBooksEnVenta(books3);
+      const books1 = result.filter((book) => book !== undefined);
+      setBooksEnVenta(books1);
     }
   }, [bookhistorial, books]);
+  // ordenar historial por fecha de actualizacion
+  useEffect(() => {
+    if (bookhistorial !== undefined && bookhistorial.length > 0 && books !== undefined && books.length > 0) {
+      const result = bookhistorial.sort((a, b) => a.updatedate2 - b.updatedate2);
+      const isbn= result.map((book => book.isbn));
+      setRecientes2(isbn);
+    }
+  }, [bookhistorial, books]);
+  
+
     // metodo shuffle (randomizar array)
     const shuffle = (array) => { 
       return array.map((a) => ({ sort: Math.random(), value: a }))
           .sort((a, b) => a.sort - b.sort)
           .map((a) => a.value); 
   }; 
-  
+ 
   function pruebas() {
-    getenventa();
-    console.log("pruebas", bookhistorial);
+    getrecientes();
+    console.log("books", books);
+    console.log("booksOtrosResultados", booksOtrosResultados);
+    console.log("booksEnVenta", booksEnVenta);
+    console.log("recientes", recientes);
+    console.log("recientes2", recientes2);
+
   }
 
   return (
     <>
       <div className="content">
-        <Buscador />
-        <Scroll books={books} titulo='Mas vendidos' />
-        <Scroll books={booksEnVenta} titulo='Ultimos añadidos' />
+        <Buscadorredireccion />
+        <Scroll books={booksEnVenta} titulo='Mas vendidos' />
+        <Scroll books={booksOtrosResultados} titulo='Ultimos añadidos' />
         <Scroll books={booksOtrosResultados} titulo='Otros resultados' />
-        <button onClick={() => pruebas()}>getbooks</button>
+        <button onClick={() => pruebas()}>pruebas</button>
         <Recomendados titulo='Recomendados' />
       </div >
     </>

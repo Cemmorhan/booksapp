@@ -5,11 +5,11 @@ function Caratula(props) {
 
 
         <div className="caratula">
-            <Link 
-            href={{
-                pathname: "/item",
-                query: { isbn: props.book.isbn }
-            }}
+            <Link
+                href={{
+                    pathname: "/item",
+                    query: { isbn: props.book.isbn }
+                }}
             >
                 <img src={props.book.image.thumbnail} className="caratula_img" alt="" />
             </Link>

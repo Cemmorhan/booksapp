@@ -38,6 +38,7 @@ export default withPageAuthRequired(function Sell(props) {
     ];
     // fecha de puesta en venta
     const book_updatedate = new Date();
+    const book_updatedate2 =book_updatedate.getTime();
 
 
     // rowSelection object indicates the need for row selection
@@ -70,6 +71,7 @@ export default withPageAuthRequired(function Sell(props) {
             getBook();
             success();
             setIsModalOpen(false);
+            setComprobante(false);
         }
     }, [comprobante, book_price]);
 
@@ -78,7 +80,7 @@ export default withPageAuthRequired(function Sell(props) {
         console.log("selectedbokinsidegetbook", book)
         if (!book) return;
         const send = {
-            book_id: book.book_id,
+            book_id: book.id,
             title: book.title,
             author: book.author,
             language: book.language,
@@ -93,6 +95,7 @@ export default withPageAuthRequired(function Sell(props) {
             user: user,
             price: book_price,
             updatedate: book_updatedate,
+            updatedate2: book_updatedate2,
         };
 
         console.log("cosas que envío", send)
@@ -149,7 +152,6 @@ export default withPageAuthRequired(function Sell(props) {
 
     // Venta
     function Venta() {
-        //getBook();
         showModal();
     }
     function showMore() {
@@ -224,7 +226,7 @@ export default withPageAuthRequired(function Sell(props) {
                         No encuentras el libro? Impórtalo de Google Books y añádelo a tu biblioteca</h4>
 
                     <Button type="primary" onClick={showMore} style={{ margin: "20px 0px" }}>
-                        Mostrar
+                        Mostrar más
                     </Button>
                 </div> : null}
 
