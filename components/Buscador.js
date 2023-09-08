@@ -61,7 +61,7 @@ function Buscador(props) {
         <>
             <div className="buscadorApi">
                 <div className="buscadorApi_titulo">
-                    <h3>Busca el libro que quieras comprar!!</h3>
+                    <h3>¡¡Busca el libro que quieras comprar!!</h3>
                 </div>
 
                 <div className='buscadorApi_input'>
