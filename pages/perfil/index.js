@@ -2,22 +2,18 @@
 import { withPageAuthRequired, useUser } from '@auth0/nextjs-auth0/client';
 import { Tabs } from 'antd';
 import { Descriptions } from 'antd';
-import Ventas from "@/components/Ventas";
 import { useEffect } from 'react';
 import { useState } from 'react';
-import {
-    Button,
-    Form,
-    Input,
-    Modal,
-    message
-} from 'antd';
+import {Button,Form,Input,Modal,message} from 'antd';
 
 
 
 export default withPageAuthRequired(function Perfil(props) {
     const { user, error, isLoading } = useUser();
     const [renderizado, setRenderizado] = useState(false);
+    const [historial, setHistorial] = useState([]);
+    const [ventas, setVentas] = useState([]);
+    const [compras, setCompras] = useState([]);
     const items = [
         {
             key: '1',
@@ -35,14 +31,28 @@ export default withPageAuthRequired(function Perfil(props) {
         {
             key: '2',
             label: `Historial`,
-            children: `Content of Tab Pane 2`,
+            children: <Descriptions.Item >{compras}</Descriptions.Item>
         },
         {
             key: '3',
             label: `Ventas`,
-            children: <Ventas ></Ventas>,
+            children: <Descriptions.Item >{ventas}</Descriptions.Item>
         },
     ];
+    //metodo get para recuperar el historial
+    const getHistorial = async () => {
+        if (!user) return;
+        const send = { user_id: user.sub};
+        const results = await fetch("/api/getlibrosuser", {
+            method: "POST",
+            body: JSON.stringify(send),
+        }).then((response) => response.json());
+        const newResults = results.map((result) => {
+            return { ...result }
+        });
+        setHistorial(newResults);
+    };
+
     //metodo post para recuperar datos o crear usuario
     const getUsers = async () => {
         if (!user) return;
@@ -83,10 +93,19 @@ export default withPageAuthRequired(function Perfil(props) {
     useEffect(() => {
         setRenderizado(true);
     }, []);
+    useEffect(() => {// sacar los titulos para el historial de libros con puntos y aparte
+        const resultado= historial.map((book, index) => (<div key={index}>{book.title}</div>));
+        setVentas(resultado);
+        const buy= historial.map((book, index) => (<div key={index}>{book.title}</div>));
+        setCompras(buy);
+    }, [historial]);
 
     useEffect(() => {setIsModalOpen
         if (renderizado) {
             getUsers();
+            if (user !== undefined) {
+                getHistorial();
+            }
         }
     }, [renderizado]);
 
@@ -141,6 +160,12 @@ export default withPageAuthRequired(function Perfil(props) {
             content: 'This is an error message',
         });
     };
+    function pruebas() {
+        console.log("usuario props" , props.usuarioAdquirido);
+        console.log ("historial del usuario" ,historial);
+        console.log("ventas del usuario", ventas);
+    }
+
 
 
     return (
@@ -315,6 +340,7 @@ export default withPageAuthRequired(function Perfil(props) {
 
 
             </div >
+            <button onClick={() => pruebas()}>pruebas</button>
         </>
     );
 });

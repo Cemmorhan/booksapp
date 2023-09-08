@@ -14,7 +14,11 @@ export default async function handler(request, response) {
     console.log(isbn);
     const books = await database
         .collection("books")
-        .find($in, {isbn:isbn})
+        .find({
+            isbn: {
+                $in: isbn
+            }
+        })
         .toArray();
     if (books.length > 0) {
         response.json(books);

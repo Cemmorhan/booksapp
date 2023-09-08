@@ -2,13 +2,13 @@ import { Input } from 'antd';
 import { Select } from 'antd';
 import { FiSearch } from "react-icons/fi";
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 
 function Buscador(props) {
-    const [value, setValue] = useState("");
-    const [type, setType] = useState("title");
+    const [value, setValue] = useState(props.value!==undefined?props.value:"");
+    const [type, setType] = useState(props.type!==undefined?props.type:"title");
     const [booksMyDB, setBooksMyDB] = useState([]);
     const [renderizado, setRenderizado] = useState(false);
+    console.log("buscandoMiguel: " + value + " " + type);
 
     const getBookFromDB = async () => {
         if (value === "") return;
@@ -33,7 +33,7 @@ function Buscador(props) {
         }
     }, [props.value, props.type]);
     useEffect(() => {
-        if (value !== undefined && type !== undefined) {
+        if (value !== "" && type !== undefined) {
             getBookFromDB();
             console.log("buscando2: " + value + " " + type);
         }
@@ -65,9 +65,9 @@ function Buscador(props) {
                 </div>
 
                 <div className='buscadorApi_input'>
-                    <Input placeholder="Eg. Harry Potter" onChange={changeInput} />
-                    <Select
-                        defaultValue="Título"
+                    <Input placeholder="Eg. Harry Potter" onChange={changeInput} defaultValue={value}/>
+                     <Select
+                        defaultValue={type}
                         style={{
                             width: 120,
                         }}

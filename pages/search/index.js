@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 export default function Search() {
     const [value, setValue] = useState();
     const [type, setType] = useState();
+    const [renderizado, setRenderizado] = useState(false);
 
 
     const router = useRouter();
@@ -12,8 +13,10 @@ export default function Search() {
     useEffect(() => {
         setValue(router.query.value)
         setType(router.query.type)
+        setRenderizado(true);
 
-    }, [router.query.value]);
+
+    }, [router.query.value, router.query.type]);
 
     useEffect(() => {
         if (value !== undefined && type !== undefined) {
@@ -23,7 +26,7 @@ export default function Search() {
     }, [value, type]);
     return (
         <>
-            <Buscador value={value} type={type} />
+            {renderizado&&<Buscador value={value} type={type} />}
         </>
 
     )
