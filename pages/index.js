@@ -18,6 +18,7 @@ export default function Home(props) {
     getbooks();
     getenventa();
   }, []);
+
   // metodo getbooks (todos los libros de la base de datos)
   const getbooks = async () => {
     const send = { books_id: "0" }
@@ -28,13 +29,14 @@ export default function Home(props) {
     const books = results.map((result) => {
       return { ...result }
     });
-    setBooks(books); 
+    setBooks(books);
   };
+
   // randomizar books (para mostrar libros aleatorios en la seccion de otros resultados)
   useEffect(() => {
     if (books !== undefined && books.length > 0) {
       const booksrandom = shuffle(books);
-      setBooksOtrosResultados(booksrandom); 
+      setBooksOtrosResultados(booksrandom);
     }
   }, [books]);
 
@@ -50,9 +52,10 @@ export default function Home(props) {
     });
     setBookhistorial(books);
   };
+
   useEffect(() => {
     // devuelve libros en venta (filtrando libros de la base de datos con los del historial en venta)
-    if (bookhistorial !== undefined && bookhistorial.length > 0 && books !== undefined && books.length > 0) {
+    if (bookhistorial !== undefined && bookhistorial.length > 0) {
       const result = books.map((book) => {
         const result = bookhistorial.find((bookhistorial) => bookhistorial.isbn === book.isbn);
         if (result !== undefined) {
@@ -62,16 +65,16 @@ export default function Home(props) {
       const books1 = result.filter((book) => book !== undefined);
       setBooksEnVenta(books1);
     }
-      // randomizar books (para mostrar libros aleatorios en la seccion de otros resultados)
+    // randomizar books (para mostrar libros aleatorios en la seccion de otros resultados)
     if (booksEnVenta !== undefined && booksEnVenta.length > 0) {
       const booksrandom = shuffle(booksEnVenta);
-      setBooksOtrosResultados(booksrandom); 
+      setBooksOtrosResultados(booksrandom);
     }
     //concatenar informacion del objeto booksEnVenta con el objeto bookhistorial (para mostrar los libros mas recientes)
     console.log("bookhistorial", bookhistorial)
     console.log("books", books)
     console.log("booksEnVenta", booksEnVenta)
-    if(bookhistorial !== undefined && bookhistorial.length > 0 && books !== undefined && books.length > 0 && booksEnVenta !== undefined && booksEnVenta.length > 0){
+    if (bookhistorial !== undefined && bookhistorial.length > 0 ) {
       console.log("intento leer recientes")
       const result = bookhistorial.map((book) => {
         const result = booksEnVenta.find((booksEnVenta) => booksEnVenta.isbn === book.isbn);
@@ -92,17 +95,19 @@ export default function Home(props) {
 
   }, [bookhistorial, books]);
 
-    // metodo shuffle (randomizar array)
-    const shuffle = (array) => { 
-      return array.map((a) => ({ sort: Math.random(), value: a }))
-          .sort((a, b) => a.sort - b.sort)
-          .map((a) => a.value); 
-  }; 
- 
+
+
+  // metodo shuffle (randomizar array)
+  const shuffle = (array) => {
+    return array.map((a) => ({ sort: Math.random(), value: a }))
+      .sort((a, b) => a.sort - b.sort)
+      .map((a) => a.value);
+  };
+
   function pruebas() {
     console.log("books", books);
     console.log("booksOtrosResultados", booksOtrosResultados);
-    console.log ("bookhistorial", bookhistorial)
+    console.log("bookhistorial", bookhistorial)
     console.log("booksEnVenta", booksEnVenta);
     console.log("recientes", recientes);
 

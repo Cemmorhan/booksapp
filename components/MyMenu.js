@@ -31,7 +31,7 @@ function MyMenu() {
                     </Link>
                     <Link href="/sell">
                         <div className="menu_item">
-                            vender
+                            Vender
                         </div>
                     </Link>
                 </div>
