@@ -23,7 +23,7 @@ export default async function handler(request, response) {
     const book_image = body.image;
     const raw = body.raw;
 
-    const book_user = body.user;
+    const book_userSell = body.userSell;
     const book_price = body.price;
     const book_updatedate = body.updatedate;
     const book_updatedate2 = body.updatedate2;
@@ -61,7 +61,7 @@ export default async function handler(request, response) {
             title: book_title,
             book_id: book_id,
             isbn: book_isbn,
-            user: book_user,
+            userSell: book_userSell,
             price: book_price,
             updatedate: book_updatedate,
             updatedate2: book_updatedate2,

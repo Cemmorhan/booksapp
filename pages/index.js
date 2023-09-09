@@ -105,18 +105,7 @@ export default function Home(props) {
           .map((a) => a.value); 
   }; 
  
-  function pruebas() {
-    console.log("books", books);
-    console.log("booksOtrosResultados", booksOtrosResultados);
-    console.log ("bookhistorial", bookhistorial)
-    console.log("booksEnVenta", booksEnVenta);
-    console.log("recientes", recientes);
 
-  }
-
-  useEffect(() => {
-/*   pruebas()
- */  }, [books, booksOtrosResultados, bookhistorial, booksEnVenta, recientes]);
 
   return (
     <>
@@ -125,8 +114,6 @@ export default function Home(props) {
         <Scroll books={books} titulo='Mas vendidos' />
         <Scroll books={recientes} titulo='Ultimos añadidos' />
         <Scroll books={booksOtrosResultados} titulo='Otros resultados' />
-        <button onClick={() => pruebas()}>pruebas</button>
-        <Recomendados titulo='Recomendados' />
       </div >
     </>
   )

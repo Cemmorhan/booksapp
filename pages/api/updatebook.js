@@ -17,14 +17,14 @@ export default async function handler(request, response) {
     const inc = body.inc;
 
     let update = await database
-        .collection("books")
-        .updateOne({ "book_id": book_id }, {
+        .collection("historial")
+        .updateOne({ "_id": book_id }, {
             $set:set, $push:push, $inc:inc
         }, { upsert: false })
 
     const book = await database
-        .collection("books")
-        .find({ book_id: book_id })
+        .collection("historial")
+        .find({ _id: book_id })
         .limit(1)
         .toArray();
     console.log(book);

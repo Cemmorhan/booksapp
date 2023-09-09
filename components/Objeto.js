@@ -1,14 +1,32 @@
 import { useState, useEffect } from 'react'
 import { Select } from 'antd';
-function Objeto({ books, itembookHistorial }) {
+import { Button } from 'antd';
+function Objeto({ books, itembookHistorial , comprar}) {
     const [isDefined, setIsDefined] = useState(false)
     const [options, setOptions] = useState([])
     const [cantidad, setCantidad] = useState(0)
-
+    const [bookselected, setBookselected] = useState([])
+    const [precio, setPrecio] = useState(0)
+    const comprobante=true
     //cosas select
     const onChange = (value) => {
         console.log(`selected ${value}`);
+        setBookselected(value)
+        setPrecio(labelToPrice(value))
     };
+
+    const labelToPrice = (value) => {
+        let price = 0
+        itembookHistorial.map((bookshistorial) => {
+            if (bookshistorial._id === value) {
+                price = bookshistorial.price
+            }
+        })
+        return price
+    }
+    
+
+    
     useEffect(() => {
         if (itembookHistorial !== undefined && itembookHistorial.length > 0) {
             setCantidad(itembookHistorial.length)
@@ -24,6 +42,10 @@ function Objeto({ books, itembookHistorial }) {
             setCantidad(0)
         }
     }, [itembookHistorial])
+    useEffect(() => {
+        console.log("bookselected", bookselected)
+    }, [bookselected])
+
 
     useEffect(() => {
         console.log("options", options)
@@ -72,16 +94,13 @@ function Objeto({ books, itembookHistorial }) {
                                 onChange={onChange}
                                 options={options}
                             />
-
-                            <div className="boton_item">
-                                <h3>Comprar</h3>
-                            </div>
+                                <Button type="primary" onClick={() => comprar(bookselected,comprobante,precio) }>Comprar</Button>
                         </div>
                     </div>
                 </div>
             </div>
         </>
-    )
+        )
 }
 
 export default Objeto;

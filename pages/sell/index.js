@@ -91,7 +91,7 @@ export default withPageAuthRequired(function Sell(props) {
             publisher: book.publisher,
             image: book.image,
             raw: book.raw,
-            user: user,
+            userSell: user,
             price: book_price,
             updatedate: book_updatedate,
             updatedate2: book_updatedate2,
