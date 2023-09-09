@@ -8,8 +8,6 @@ function Buscador(props) {
     const [type, setType] = useState(props.type!==undefined?props.type:"title");
     const [booksMyDB, setBooksMyDB] = useState([]);
     const [renderizado, setRenderizado] = useState(false);
-    console.log("buscandoMiguel: " + value + " " + type);
-
     const getBookFromDB = async () => {
         if (value === "") return;
         const send = { type: type, value: value };

@@ -223,7 +223,7 @@ export default withPageAuthRequired(function Sell(props) {
                 </div>
                 {databooks.length > 0 ? <div style={{ display: "flex", justifyContent: "right", alignItems: "center", flexDirection: "column" }}>
                     <h4>
-                        No encuentras el libro? Impórtalo de Google Books y añádelo a tu biblioteca</h4>
+                        ¿No encuentras el libro? Impórtalo de Google Books y añádelo a la biblioteca</h4>
 
                     <Button type="primary" onClick={showMore} style={{ margin: "20px 0px" }}>
                         Mostrar más
@@ -232,7 +232,7 @@ export default withPageAuthRequired(function Sell(props) {
 
                 <div style={{ display: "flex", justifyContent: "right", alignItems: "center" }}>
                     <Button type="primary" onClick={Venta}>
-                        vender
+                        Vender
                     </Button>
                 </div>
             </div>

@@ -24,7 +24,7 @@ function Buscadorredireccion(props) {
         <>
             <div className="buscadorApi">
                 <div className="buscadorApi_titulo">
-                    <h3>Encuentra el libro que buscas!!</h3>
+                    <h3>¡¡Encuentra el libro que buscas!!</h3>
                 </div>
 
                 <div className='buscadorApi_input'>
