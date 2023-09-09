@@ -68,7 +68,11 @@ export default function Home(props) {
       setBooksOtrosResultados(booksrandom); 
     }
     //concatenar informacion del objeto booksEnVenta con el objeto bookhistorial (para mostrar los libros mas recientes)
+    console.log("bookhistorial", bookhistorial)
+    console.log("books", books)
+    console.log("booksEnVenta", booksEnVenta)
     if(bookhistorial !== undefined && bookhistorial.length > 0 && books !== undefined && books.length > 0 && booksEnVenta !== undefined && booksEnVenta.length > 0){
+      console.log("intento leer recientes")
       const result = bookhistorial.map((book) => {
         const result = booksEnVenta.find((booksEnVenta) => booksEnVenta.isbn === book.isbn);
         if (result !== undefined) {
