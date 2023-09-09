@@ -4,7 +4,6 @@ import BuscadorApi from "@/components/BuscadorApi"
 import { Divider, Radio, Table } from 'antd';
 import { useEffect, useState } from 'react';
 import { message, Button, Modal } from 'antd';
-import { useFileSystemPublicRoutes } from '@/next.config';
 import ObjetoModal from "../../components/ObjetoModal";
 
 
