@@ -82,6 +82,7 @@ export default function Home(props) {
           t.isbn === book.isbn
         ))
       )
+      console.log("books4", books4)
       setRecientes(books4);
     }
 
@@ -102,6 +103,10 @@ export default function Home(props) {
     console.log("recientes", recientes);
 
   }
+
+  useEffect(() => {
+  pruebas()
+  }, [books, booksOtrosResultados, bookhistorial, booksEnVenta, recientes]);
 
   return (
     <>
