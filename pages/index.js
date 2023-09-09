@@ -109,8 +109,8 @@ export default function Home(props) {
   }
 
   useEffect(() => {
-  pruebas()
-  }, [books, booksOtrosResultados, bookhistorial, booksEnVenta, recientes]);
+/*   pruebas()
+ */  }, [books, booksOtrosResultados, bookhistorial, booksEnVenta, recientes]);
 
   return (
     <>
