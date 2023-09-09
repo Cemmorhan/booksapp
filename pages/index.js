@@ -82,7 +82,7 @@ export default function Home(props) {
           t.isbn === book.isbn
         ))
       )
-      setRecientes(books4);
+      setRecientes(result);
     }
 
   }, [bookhistorial, books]);
