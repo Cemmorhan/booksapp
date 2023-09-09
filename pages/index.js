@@ -75,14 +75,14 @@ export default function Home(props) {
           return { ...book, ...result }
         }
       });
-      
+      const books3 = result.filter((book) => book !== undefined);
       //ahora quitar los isbn repetidos de book3
-      const books4 = result.filter((book, index, self) =>
+      const books4 = books3.filter((book, index, self) =>
         index === self.findIndex((t) => (
           t.isbn === book.isbn
         ))
       )
-      setRecientes(result);
+      setRecientes(books4);
     }
 
   }, [bookhistorial, books]);
