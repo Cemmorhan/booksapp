@@ -4,6 +4,7 @@
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
+    "id":"https://booksapp-omega.vercel.app//=1",
     "name": "Bookapp",
     "short_name": "Bookapp",
     "description": "Bookapp Web App",
