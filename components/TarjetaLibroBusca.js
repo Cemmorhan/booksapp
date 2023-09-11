@@ -56,7 +56,7 @@ function TarjetaLibroBusca({ book }) {
                            <p>{itembook.author}</p> 
                            <p>{"Precio de venta " + book.price + "€"}</p>
                            <p>{"Estado: " + book.state}</p>
-                           <p>{"Fecha de subida: " + book.updatedate}</p>
+                           <p>{"Fecha: " + book.updatedate}</p>
                         </div>
 
                     </div>

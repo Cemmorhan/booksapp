@@ -31,8 +31,8 @@ export default withPageAuthRequired(function Perfil(props) {
         },
         {
             key: '2',
-            label: `Historial`,
-            children: <Descriptions.Item >{compras}</Descriptions.Item>
+            label: `Compras`,
+            children: printCompras()
         },
         {
             key: '3',
@@ -53,6 +53,20 @@ export default withPageAuthRequired(function Perfil(props) {
         });
         setHistorial(newResults);
     };
+     //metodo get para recuperar el historial
+     const getHistorialcompras = async () => {
+        if (!user) return;
+        const send = { user_id: user.sub};
+        const results = await fetch("/api/getlibrosusercompras", {
+            method: "POST",
+            body: JSON.stringify(send),
+        }).then((response) => response.json());
+        const newResults = results.map((result) => {
+            return { ...result }
+        });
+        setCompras(newResults);
+    };
+
 
     //metodo post para recuperar datos o crear usuario
     const getUsers = async () => {
@@ -92,12 +106,32 @@ export default withPageAuthRequired(function Perfil(props) {
             )
         } else {
             if (historial.length === 0) {
-                return (null
-                )
+                return (null)
             } else {
                 return (
                     <div className='card_container'>
                         {historial.map((book, index) => {
+                            return (
+                                <TarjetaLibroBusca book={book} key={index}/>
+                            )
+                        })}
+                    </div>
+
+                )
+            }
+        }
+    }
+    function printCompras() {
+        if (compras === undefined) {
+            return (null
+            )
+        } else {
+            if (compras.length === 0) {
+                return (null)
+            } else {
+                return (
+                    <div className='card_container'>
+                        {compras.map((book, index) => {
                             return (
                                 <TarjetaLibroBusca book={book} key={index}/>
                             )
@@ -119,15 +153,6 @@ export default withPageAuthRequired(function Perfil(props) {
     useEffect(() => {
         setRenderizado(true);
     }, []);
-    useEffect(() => {// sacar los titulos para el historial de libros con puntos y aparte
-        const resultado= historial.map((book, index) => (<div key={index}>{book.title}</div>));
-        console.log("historial",historial)
-        setVentas(resultado);
-        console.log("ventas",ventas);
-        const buy= historial.map((book, index) => (<div key={index}>{book.title}</div>));
-        setCompras(buy);
-        console.log("compras",compras);
-    }, [historial]);
 
     
 
@@ -136,6 +161,7 @@ export default withPageAuthRequired(function Perfil(props) {
             getUsers();
             if (user !== undefined) {
                 getHistorial();
+                getHistorialcompras();
             }
         }
     }, [renderizado]);
