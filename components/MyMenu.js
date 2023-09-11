@@ -1,16 +1,32 @@
 import Link from 'next/link'
 import { FiHome, FiUser, FiShoppingCart, FiMessageSquare, FiDollarSign } from "react-icons/fi";
 
-function MyMenu() {
+function MyMenu({ user }) {
+    
+    const logout = () => {
+        if (user) {
+            return (
+                <Link href="/api/auth/logout">
+                    <div className="menu_item">
+                        Logout
+                    </div>
+                </Link>
+            )
+        } else {
+            return (
+                <Link href="/api/auth/login">
+                    <div className="menu_item">
+                        Login
+                    </div>
+                </Link>
+            )
+        }
+    }
     return (
         <>
             <div className="menu">
-                <div >      
-                    <Link href="/api/auth/logout">
-                    <div className="menu_item">
-                    Logout
-                    </div>
-                </Link>
+                <div >
+                    {logout()}
                 </div>
 
                 <div className="menu_opciones">

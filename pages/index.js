@@ -1,5 +1,4 @@
 import Scroll from '@/components/Scroll';
-import Recomendados from '@/components/Recomendados';
 import Buscadorredireccion from '@/components/Buscadorredireccion';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -92,7 +91,6 @@ export default function Home(props) {
           t.isbn === book.isbn
         ))
       )
-      console.log("books4", books4)
       setRecientes(books4);
     }
   }, [bookhistorial, books, booksEnVenta]);

@@ -7,7 +7,7 @@ import { withPageAuthRequired, useUser } from '@auth0/nextjs-auth0/client';
 
 export default withPageAuthRequired(function Item(props) {
     const [renderizado, setRenderizado] = useState(false);
-    const { user, error, isLoading } = useUser();
+    const { user, error, isLoading }= useUser();
     const [itembook, setItembook] = useState([]);
     const [books, setBooks] = useState([]);
     const [isbn, setIsbn] = useState("0");
@@ -15,6 +15,7 @@ export default withPageAuthRequired(function Item(props) {
     const [bookselected, setBookselected] = useState([]);
     const [comprobante, setComprobante] = useState(false);
     const [precio, setPrecio] = useState(0);
+    const [vendedor, setVendedor] = useState([]);
     const router = useRouter();
 
     // fecha de compra
@@ -109,6 +110,20 @@ export default withPageAuthRequired(function Item(props) {
     function pruebas() {
         updateBook();
     }
+    // recuperar usuario vendedor
+    const getVendedor = async () => {
+        const send = { book_id: bookselected };
+        const results = await fetch("/api/getvendedor", {
+            method: "POST",
+            body: JSON.stringify(send),
+        }).then((response) => response.json());
+        const newResults = results.map((result) => {
+            return { ...result }
+        });
+        console.log("vendedor", newResults);
+        setVendedor(newResults);
+    };
+
     //recuperar libro seleccionado para compra
     const recuperar = (bookselected, comprobante, precio) => {
         console.log("recuperar", bookselected);
@@ -117,6 +132,7 @@ export default withPageAuthRequired(function Item(props) {
         console.log("book_selldate", book_selldate);
         console.log("book_selldate2", book_selldate2);
         console.log("precio", precio);
+        console.log("vendedor", vendedor);
         setBookselected(bookselected);
         setComprobante(comprobante);
         setPrecio(precio);
@@ -125,30 +141,15 @@ export default withPageAuthRequired(function Item(props) {
     useEffect(() => {
         if (comprobante && bookselected !== undefined) {
             //updateBook();
-            //setValues();
+            setValues();
             setComprobante(false);
-            //setValuesComprador();
+            
+            setValuesComprador();
+            getVendedor();
         }
     }, [comprobante, bookselected]);
 
-    // Comprar libro
-    const updateBook = async () => {
-        if (!user) return;
-        const send = {
-            book_id: bookselected,
-            userbuy: user,
-            selldate: book_selldate,
-            selldate2: book_selldate2,
-        };
-        const results = await fetch("/api/comprar", {
-            method: "POST",
-            body: JSON.stringify(send),
-        }).then((response) => response.json());
-        const newResults = results.map((result) => {
-            return { ...result }
-        });
-    };
-    // comprar libro2
+    // comprar libro
     const actualizarlibro = async (values) => {
         if (!user) return;
         const send = {
@@ -169,10 +170,10 @@ export default withPageAuthRequired(function Item(props) {
     function setValues() {
         console.log("valueando");
         actualizarlibro({
-            push: {salesdata: {userbuy: user, selldate: book_selldate, selldate2: book_selldate2}},
-            set: {state: "vendido"}
+            set: {state: "vendido",salesdata: {userbuy: user, selldate: book_selldate, selldate2: book_selldate2}}
         });
     }
+    
 
     //descontar saldo
     const actualizarusuario = async (values) => {

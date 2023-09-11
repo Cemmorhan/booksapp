@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
   return (
     <UserProvider>
     <div className="mainContainer">
-    <MyMenu />
+    <MyMenu user={usuarioAdquirido} />
     <Component {...pageProps} setUsuarioAdquirido={setUsuarioAdquirido} usuarioAdquirido={usuarioAdquirido} />
     </div>
      </UserProvider>

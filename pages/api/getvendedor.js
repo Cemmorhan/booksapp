@@ -3,22 +3,22 @@ import { connectToDatabase } from "../../lib/mongodb"
 
 export default async function handler(request, response) {
 
+    console.log("getuservendedor");
     const { database } = await connectToDatabase()
+    console.log(request.body)
+    /* transform boy from json to object */
     const body = JSON.parse(request.body);
-    if (body.user_id === undefined) {
+    if (body.book_id === undefined) {
         response.json([]);
         return;
     }
-    const usuario = body.user_id;
-    const books = await database
+    const _id = body.book_id;
+    const book = await database
         .collection("historial")
-        .find({"userSell.sub":usuario})
+        .find({ _id: _id })
+        .limit(1)
         .toArray();
-        console.log("libros del usuario",books);
-    if (books.length > 0) {
-        response.json(books);
-    }else
-    {
-        response.json([]);
+    if (book.length > 0) {
+        response.json(book);
     }
 }

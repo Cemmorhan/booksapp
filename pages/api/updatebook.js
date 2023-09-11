@@ -1,5 +1,5 @@
 import { connectToDatabase } from "../../lib/mongodb"
-
+import { ObjectId } from 'mongodb'
 
 export default async function handler(request, response) {
 
@@ -11,11 +11,13 @@ export default async function handler(request, response) {
         response.json([]);
         return;
     }
-    const book_id = body.book_id;
+    const book_id = new ObjectId(body.book_id);
     const set = body.set;
     const push = body.push;
     const inc = body.inc;
 
+    console.log("book_id", book_id);
+    console.log(push);
     let update = await database
         .collection("historial")
         .updateOne({ "_id": book_id }, {

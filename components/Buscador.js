@@ -2,12 +2,14 @@ import { Input } from 'antd';
 import { Select } from 'antd';
 import { FiSearch } from "react-icons/fi";
 import { useEffect, useState } from 'react';
+import TarjetaLibro from './TarjetaLibro';
 
 function Buscador(props) {
-    const [value, setValue] = useState(props.value!==undefined?props.value:"");
-    const [type, setType] = useState(props.type!==undefined?props.type:"title");
+    const [value, setValue] = useState(props.value !== undefined ? props.value : "");
+    const [type, setType] = useState(props.type !== undefined ? props.type : "title");
     const [booksMyDB, setBooksMyDB] = useState([]);
     const [renderizado, setRenderizado] = useState(false);
+
     const getBookFromDB = async () => {
         if (value === "") return;
         const send = { type: type, value: value };
@@ -18,8 +20,10 @@ function Buscador(props) {
         const newResults = results.map((result) => {
             return { ...result }
         });
+        console.log(newResults);
         setBooksMyDB(newResults);
     };
+
     useEffect(() => {
         setRenderizado(true);
     }, []);
@@ -53,6 +57,29 @@ function Buscador(props) {
         console.log(booksMyDB);
     }
 
+    function printBooksMyDB() {
+        if (booksMyDB === undefined) {
+            return (null
+            )
+        } else {
+            if (booksMyDB.length === 0) {
+                return (null
+                )
+            } else {
+                return (
+                    <div className='card_container'>
+                        {booksMyDB.map((book) => {  
+                            return (
+                                <TarjetaLibro book={book} />
+                            )
+                        })}
+                    </div>
+
+                )
+            }
+        }
+    }
+
 
 
     return (
@@ -63,8 +90,8 @@ function Buscador(props) {
                 </div>
 
                 <div className='buscadorApi_input'>
-                    <Input placeholder="Eg. Harry Potter" onChange={changeInput} defaultValue={value}/>
-                     <Select
+                    <Input placeholder="Eg. Harry Potter" onChange={changeInput} defaultValue={value} />
+                    <Select
                         defaultValue={type}
                         style={{
                             width: 120,
@@ -90,8 +117,9 @@ function Buscador(props) {
                         <FiSearch size={30} color='white' />
                     </div>
                 </div>
-
-                <button onClick={pruebas}>pruebas</button>
+                {printBooksMyDB()}
+                {/* 
+                <button onClick={pruebas}>pruebas</button> */}
 
 
             </div>

@@ -27,6 +27,7 @@ export default function Search() {
     return (
         <>
             {renderizado&&<Buscador value={value} type={type} />}
+            
         </>
 
     )
