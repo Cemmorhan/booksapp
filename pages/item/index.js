@@ -106,13 +106,9 @@ export default withPageAuthRequired(function Item(props) {
             getUsers();
         }
     }, [renderizado]);
-
-    function pruebas() {
-        updateBook();
-    }
     // recuperar usuario vendedor
     const getVendedor = async () => {
-        const send = { book_id: bookselected };
+        const send = { book_id: bookselected, state: "en venta" };
         const results = await fetch("/api/getvendedor", {
             method: "POST",
             body: JSON.stringify(send),
@@ -126,28 +122,26 @@ export default withPageAuthRequired(function Item(props) {
 
     //recuperar libro seleccionado para compra
     const recuperar = (bookselected, comprobante, precio) => {
-        console.log("recuperar", bookselected);
-        console.log("comprobante", comprobante);
-        console.log("user", user);
-        console.log("book_selldate", book_selldate);
-        console.log("book_selldate2", book_selldate2);
-        console.log("precio", precio);
-        console.log("vendedor", vendedor);
         setBookselected(bookselected);
         setComprobante(comprobante);
         setPrecio(precio);
     };
 
     useEffect(() => {
-        if (comprobante && bookselected !== undefined) {
-            //updateBook();
-            setValues();
-            setComprobante(false);
-
-            setValuesComprador();
+        if (comprobante && bookselected !== undefined ) {
             getVendedor();
+            console.log("comprando", vendedor);
         }
     }, [comprobante, bookselected]);
+    useEffect(() => {
+        if (vendedor !== undefined && vendedor.length > 0 && vendedor[0].state === "en venta") {
+            console.log("if vendedor");
+                setValues();
+                setComprobante(false);
+                setValuesComprador();
+                setValuesVendedor();
+                }
+    }, [vendedor]);
 
     // comprar libro
     const actualizarlibro = async (values) => {
@@ -168,7 +162,6 @@ export default withPageAuthRequired(function Item(props) {
     };
 
     function setValues() {
-        console.log("valueando");
         actualizarlibro({
             set: {state: "vendido",salesdata: {userbuy: user, selldate: book_selldate, selldate2: book_selldate2}}
         });
@@ -195,19 +188,40 @@ export default withPageAuthRequired(function Item(props) {
     };
 
     function setValuesComprador() {
-        console.log("valueando usuario");
         actualizarusuario({
             inc: {saldo: -precio}
         });
     }
+     //aumentar saldo saldo
+     const actualizarusuariovendedor = async (values) => {
+        if (!user) return;
+        const send = {
+            user_id: vendedor[0].userSell.sub,
+            set: values.set === undefined ? {} : values.set,
+            push: values.push === undefined ? {} : values.push,
+            inc: values.inc === undefined ? {} : values.inc,
+        };
+        const results = await fetch("/api/updateuser", {
+            method: "POST",
+            body: JSON.stringify(send),
+        }).then((response) => response.json());
+        const newResults = results.map((result) => {
+            return { ...result }
+        });
+        props.setUsuarioAdquirido(newResults);
+    };
 
+    function setValuesVendedor() {
+        actualizarusuariovendedor({
+            inc: {saldo: precio}
+        });
+    }
 
 
     return (
         <div className="content">
             {itembook.length > 0 ? <Objeto books={itembook} itembookHistorial={itembookHistorial} comprar={recuperar} /> : <h2>No se encuentra el libro</h2>}
             <Scroll books={books} titulo='Vistos recientemente' />
-            <button onClick={pruebas}>pruebas</button>
         </div>
 
 

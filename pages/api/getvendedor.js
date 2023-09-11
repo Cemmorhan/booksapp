@@ -1,24 +1,29 @@
 import { connectToDatabase } from "../../lib/mongodb"
-
+import { ObjectId } from 'mongodb'
 
 export default async function handler(request, response) {
 
-    console.log("getuservendedor");
     const { database } = await connectToDatabase()
-    console.log(request.body)
-    /* transform boy from json to object */
     const body = JSON.parse(request.body);
     if (body.book_id === undefined) {
         response.json([]);
         return;
     }
-    const _id = body.book_id;
-    const book = await database
+    if (body.state === undefined) {
+        response.json([]);
+        return;
+    }
+    const _id = new ObjectId(body.book_id);
+    const state = body.state;
+    const books = await database
         .collection("historial")
-        .find({ _id: _id })
-        .limit(1)
+        .find({_id:_id, state:state})
         .toArray();
-    if (book.length > 0) {
-        response.json(book);
+        console.log("bookshistorial",books);
+    if (books.length > 0) {
+        response.json(books);
+    }else
+    {
+        response.json([]);
     }
 }
