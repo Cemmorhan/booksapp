@@ -5,6 +5,7 @@ import { Descriptions } from 'antd';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import {Button,Form,Input,Modal,message} from 'antd';
+import TarjetaLibroBusca from '@/components/TarjetaLibroBusca';
 
 
 
@@ -36,8 +37,10 @@ export default withPageAuthRequired(function Perfil(props) {
         {
             key: '3',
             label: `Ventas`,
-            children: <Descriptions.Item >{ventas}</Descriptions.Item>
-        },
+/*             children: <Descriptions.Item >{ventas}</Descriptions.Item>
+ */ 
+            children: printHistorial()
+       },
     ];
     //metodo get para recuperar el historial
     const getHistorial = async () => {
@@ -85,6 +88,31 @@ export default withPageAuthRequired(function Perfil(props) {
         props.setUsuarioAdquirido(newResults);
     };
 
+    function printHistorial() {
+        if (historial === undefined) {
+            return (null
+            )
+        } else {
+            if (historial.length === 0) {
+                return (null
+                )
+            } else {
+                return (
+                    <div className='card_container'>
+                        {historial.map((book, index) => {
+                            return (
+                                <TarjetaLibroBusca book={book} key={index}/>
+                            )
+                        })}
+                    </div>
+
+                )
+            }
+        }
+    }
+
+
+
     function setSaldo() {
         console.log("setSaldo");
         updateUsers({ inc: { saldo: 1000 } });
@@ -95,10 +123,15 @@ export default withPageAuthRequired(function Perfil(props) {
     }, []);
     useEffect(() => {// sacar los titulos para el historial de libros con puntos y aparte
         const resultado= historial.map((book, index) => (<div key={index}>{book.title}</div>));
+        console.log("historial",historial)
         setVentas(resultado);
+        console.log("ventas",ventas);
         const buy= historial.map((book, index) => (<div key={index}>{book.title}</div>));
         setCompras(buy);
+        console.log("compras",compras);
     }, [historial]);
+
+    
 
     useEffect(() => {setIsModalOpen
         if (renderizado) {
