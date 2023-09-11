@@ -68,7 +68,7 @@ export default withPageAuthRequired(function Item(props) {
         });
         setItembook(books);
     };
-    //buscar libros historial
+    //buscar libros historial 
     const gethistorial = async () => {
         if (isbn === undefined) {
             return;
@@ -76,7 +76,7 @@ export default withPageAuthRequired(function Item(props) {
         if (isbn === "0") {
             return;
         }
-        const send = { isbn: isbn }
+        const send = { isbn: isbn,state: "en venta"}
         const results = await fetch("/api/gethistorial", {
             method: "POST",
             body: JSON.stringify(send),
@@ -143,7 +143,7 @@ export default withPageAuthRequired(function Item(props) {
             //updateBook();
             setValues();
             setComprobante(false);
-            
+
             setValuesComprador();
             getVendedor();
         }

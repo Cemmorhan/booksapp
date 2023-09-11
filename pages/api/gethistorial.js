@@ -9,10 +9,15 @@ export default async function handler(request, response) {
         response.json([]);
         return;
     }
+    if (body.state === undefined) {
+        response.json([]);
+        return;
+    }
     const isbn = body.isbn;
+    const state = body.state;
     const books = await database
         .collection("historial")
-        .find({isbn:isbn})
+        .find({isbn:isbn, state:state})
         .toArray();
         console.log("bookshistorial",books);
     if (books.length > 0) {
