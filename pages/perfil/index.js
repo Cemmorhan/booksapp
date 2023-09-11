@@ -5,7 +5,8 @@ import { Descriptions } from 'antd';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import {Button,Form,Input,Modal,message} from 'antd';
-import TarjetaLibroBusca from '@/components/TarjetaLibroBusca';
+import TarjetaLibroVenta from '@/components/TarjetaLibroVenta';
+import TarjetaLibroCompra from '@/components/TarjetaLibroCompra';
 
 
 
@@ -112,7 +113,7 @@ export default withPageAuthRequired(function Perfil(props) {
                     <div className='card_container'>
                         {historial.map((book, index) => {
                             return (
-                                <TarjetaLibroBusca book={book} key={index}/>
+                                <TarjetaLibroVenta book={book} key={index}/>
                             )
                         })}
                     </div>
@@ -133,7 +134,7 @@ export default withPageAuthRequired(function Perfil(props) {
                     <div className='card_container'>
                         {compras.map((book, index) => {
                             return (
-                                <TarjetaLibroBusca book={book} key={index}/>
+                                <TarjetaLibroCompra book={book} key={index}/>
                             )
                         })}
                     </div>

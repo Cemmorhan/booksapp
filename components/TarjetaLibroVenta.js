@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Select } from 'antd';
 import { Button } from 'antd';
 import Link from 'next/link';
-function TarjetaLibroBusca({ book }) {
+function TarjetaLibroVenta({ book }) {
     const [itembook, setItembook] = useState(null);
 
     const getonebookbyisbn = async () => {
@@ -56,7 +56,7 @@ function TarjetaLibroBusca({ book }) {
                            <p>{itembook.author}</p> 
                            <p>{"Precio de venta " + book.price + "€"}</p>
                            <p>{"Estado: " + book.state}</p>
-                           <p>{"Fecha: " + book.updatedate}</p>
+                           <p>{"Fecha de subida: " + book.updatedate}</p>
                         </div>
 
                     </div>
@@ -80,4 +80,4 @@ function TarjetaLibroBusca({ book }) {
 
     )
 }
-export default TarjetaLibroBusca
+export default TarjetaLibroVenta
