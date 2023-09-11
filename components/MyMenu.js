@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import { FiHome, FiUser, FiShoppingCart, FiMessageSquare, FiDollarSign } from "react-icons/fi";
+import { FiHome, FiUser, FiShoppingCart, FiMessageSquare, FiDollarSign,FiSearch } from "react-icons/fi";
 
 function MyMenu({ user }) {
-    
+
     const logout = () => {
         if (user) {
             return (
@@ -40,14 +40,15 @@ function MyMenu({ user }) {
                             Perfil
                         </div>
                     </Link>
-                    <Link href="/cesta">
-                        <div className="menu_item">
-                            Cesta
-                        </div>
-                    </Link>
+
                     <Link href="/sell">
                         <div className="menu_item">
                             Vender
+                        </div>
+                    </Link>
+                    <Link href="/search">
+                        <div className="menu_item">
+                            Buscar
                         </div>
                     </Link>
                 </div>
@@ -58,9 +59,9 @@ function MyMenu({ user }) {
                         <FiHome size={25} />
                     </div>
                 </Link>
-                <Link href="/cesta">
+                <Link href="/search">
                     <div className="menu_item_bottom">
-                        <FiShoppingCart size={25} />
+                        <FiSearch size={25} />
                     </div>
                 </Link>
                 <Link href="/sell">
