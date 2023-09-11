@@ -68,9 +68,9 @@ function Buscador(props) {
             } else {
                 return (
                     <div className='card_container'>
-                        {booksMyDB.map((book) => {  
+                        {booksMyDB.map((book, index) => {
                             return (
-                                <TarjetaLibro book={book} />
+                                <TarjetaLibro book={book} key={index}/>
                             )
                         })}
                     </div>
