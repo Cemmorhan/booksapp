@@ -37,8 +37,6 @@ export default withPageAuthRequired(function Perfil(props) {
         {
             key: '3',
             label: `Ventas`,
-/*             children: <Descriptions.Item >{ventas}</Descriptions.Item>
- */ 
             children: printHistorial()
        },
     ];

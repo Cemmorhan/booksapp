@@ -54,7 +54,9 @@ function TarjetaLibroBusca({ book }) {
 
                         <div className="data_card">
                            <p>{itembook.author}</p> 
-                           <p>{"Precio de venta" + book.price}</p> 
+                           <p>{"Precio de venta " + book.price + "€"}</p>
+                           <p>{"Estado: " + book.state}</p>
+                           <p>{"Fecha de subida: " + book.updatedate}</p>
                         </div>
 
                     </div>
