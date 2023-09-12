@@ -16,7 +16,7 @@ function BuscadorApi(props) {
             return;
         }
         const books = results.items.map((result, index) => {
-            const id = result.id;
+            const book_id = result.id;
             const title = result.volumeInfo.subtitle != undefined ? result.volumeInfo.title + " " + result.volumeInfo.subtitle : result.volumeInfo.title;
             const author = result.volumeInfo.authors;
             const language = result.volumeInfo.language;
@@ -29,7 +29,7 @@ function BuscadorApi(props) {
             const publisher = result.volumeInfo.publisher;
             const raw = result;
             const image = Array.isArray(result.volumeInfo.imageLinks) ? result.volumeInfo.imageLinks.thumbnail : result.volumeInfo.imageLinks;
-            return { id, title, author, language, description, isbn, year, pages, genre, publisher, raw, image }
+            return { book_id, title, author, language, description, isbn, year, pages, genre, publisher, raw, image }
         });
 
         const booksfiltered = books.filter((book) => book.isbn != undefined);

@@ -12,7 +12,7 @@ export default async function handler(request, response) {
     const usuario = body.user_id;
     const books = await database
         .collection("historial")
-        .find({"salesdata.userbuy.sub":usuario})
+        .find({"salesdata.userbuy.user_id":usuario})
         .toArray();
         console.log("libros del usuario",books);
     if (books.length > 0) {

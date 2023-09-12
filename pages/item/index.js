@@ -108,6 +108,10 @@ export default withPageAuthRequired(function Item(props) {
         }
     }, [renderizado]);
 
+    useEffect(() => {
+        console.log("props.usuarioAdquirido", props.usuarioAdquirido);
+    }, [props.usuarioAdquirido]);
+
     // recuperar usuario vendedor
     const getVendedor = async () => {
         const send = { book_id: bookselected, state: "en venta" };
@@ -146,34 +150,38 @@ export default withPageAuthRequired(function Item(props) {
                 errorMessage1();
             }
         }
-    }, [ bookselected]);
+    }, [bookselected]);
 
     useEffect(() => {
-        if (renderizado){
-        if (vendedor !== undefined && vendedor.length > 0 && vendedor[0].state === "en venta") {
-            getUsersVendedor();
-        }
-        else {
-            errorMessage3();
-        }}}
-    , [vendedor]);
-
-    useEffect(() => {
-        if(renderizado){
-        console.log("usuariovendedoren" + usuariovendedor.saldo + "es mayor que" + precio);
-
-        if (usuariovendedor!= undefined && usuariovendedor !== null) {
-            if (usuariovendedor.saldo >= precio) {
-                setValues();
-                setValuesComprador();
-                setValuesVendedor();
-                success();
-            }else {
-                errorMessage2();
+        if (renderizado) {
+            if (vendedor !== undefined && vendedor.length > 0 && vendedor[0].state === "en venta") {
+                getUsersVendedor();
             }
-        } else {
-            errorMessage3();
-        }}
+            else {
+                errorMessage3();
+            }
+        }
+    }
+        , [vendedor]);
+
+    useEffect(() => {
+        if (renderizado) {
+            console.log("usuariovendedoren" + user.saldo + "es mayor que" + precio);
+            console.log("user", props.usuarioAdquirido)
+
+            if (props.usuarioAdquirido != undefined && props.usuarioAdquirido !== null && usuariovendedor != undefined && usuariovendedor !== null && vendedor !== undefined && vendedor.length > 0 && vendedor[0].state === "en venta") {
+                if (props.usuarioAdquirido.saldo >= precio) {
+                    setValues();
+                    setValuesComprador();
+                    setValuesVendedor();
+                    success();
+                } else {
+                    errorMessage2();
+                }
+            } else {
+                errorMessage3();
+            }
+        }
     }, [usuariovendedor]);
 
 
@@ -197,7 +205,7 @@ export default withPageAuthRequired(function Item(props) {
 
     function setValues() {
         actualizarlibro({
-            set: { state: "vendido", salesdata: { userbuy: user, selldate: book_selldate, selldate2: book_selldate2 } }
+            set: { state: "vendido", salesdata: { userbuy: props.usuarioAdquirido, selldate: book_selldate, selldate2: book_selldate2 } }
         });
     }
 
@@ -274,7 +282,7 @@ export default withPageAuthRequired(function Item(props) {
             content: 'No se pudo realizar la compra, el libro ya no se encuentra en venta',
         });
     };
-   
+
     useEffect(() => {
         setRenderizado(true);
     }, []);
@@ -284,7 +292,7 @@ export default withPageAuthRequired(function Item(props) {
         <>
             {contextHolder}
             <div className="content">
-                {itembook.length > 0 ? <Objeto books={itembook} itembookHistorial={itembookHistorial} setBookselected={setBookselected} setPrecio={setPrecio}/> : <h2>No se encuentra el libro</h2>}
+                {itembook.length > 0 ? <Objeto books={itembook} itembookHistorial={itembookHistorial} setBookselected={setBookselected} setPrecio={setPrecio} /> : <h2>No se encuentra el libro</h2>}
                 <Scroll books={books} titulo='Vistos recientemente' />
             </div>
         </>

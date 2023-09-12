@@ -56,7 +56,13 @@ function TarjetaLibroVenta({ book }) {
                            <p>{itembook.author}</p> 
                            <p>{"Precio de venta " + book.price + "€"}</p>
                            <p>{"Estado: " + book.state}</p>
-                           <p>{"Fecha de subida: " + book.updatedate}</p>
+                           <p>{"Fecha de subida: " + book.updatedate.split("T")[0]}</p>
+                           <b>Datos comprador</b>
+                           <p>{"Nombre: " + book.salesdata.userbuy.name + " " + book.salesdata.userbuy.lastname}</p>
+                           <p>{"Dirección: " + book.salesdata.userbuy.address}</p>
+                           <p>{"Ciudad: " + book.salesdata.userbuy.state}</p>
+                           <p>{"Código postal: " + book.salesdata.userbuy.zip}</p>
+                           <p>{"País: " + book.salesdata.userbuy.country}</p>
                         </div>
 
                     </div>

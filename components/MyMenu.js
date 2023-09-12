@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FiHome, FiUser, FiShoppingCart, FiMessageSquare, FiDollarSign,FiSearch } from "react-icons/fi";
+import { FiHome, FiUser, FiShoppingCart, FiMessageSquare, FiDollarSign, FiSearch } from "react-icons/fi";
 
 function MyMenu({ user }) {
 
@@ -22,10 +22,12 @@ function MyMenu({ user }) {
             )
         }
     }
+    
+    
     const saldo = () => {
         if (user) {
             return (
-                <div className="menu_item">
+                <div className="menu_item" style={{color: user.saldo>0?"green":"red"}}>
                     {user.saldo} €
                 </div>
             )
@@ -37,8 +39,7 @@ function MyMenu({ user }) {
                 <div >
                     {logout()}
                 </div>
-
-                <div className="menu_opciones">
+                <div className='menugroup'><div className="menu_opciones">
                     <Link href="/">
                         <div className="menu_item">
                             Home
@@ -59,8 +60,12 @@ function MyMenu({ user }) {
                             Perfil
                         </div>
                     </Link>
-                    {saldo()}
                 </div>
+
+                    {saldo()}
+
+                </div>
+
             </div>
             <div className="menu_bottom">
                 <Link href="/">

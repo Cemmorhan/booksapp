@@ -22,6 +22,13 @@ function TarjetaLibroCompra({ book }) {
         });
         setItembook(books[0]);
     };
+    
+    useEffect(() => {
+        if (book) {
+            console.log("MYBOOK",book);
+            console.log(book.salesdata.selldate.split("T")[0]);
+        }
+    }, [book]);
 
     useEffect(() => {
         getonebookbyisbn();
@@ -56,7 +63,7 @@ function TarjetaLibroCompra({ book }) {
                            <p>{itembook.author}</p> 
                            <p>{"Precio de venta " + book.price + "€"}</p>
                            <p>{"Estado: " + book.state}</p>
-                           <p>{"Fecha de compra: " + book.salesdata.selldate}</p>
+                           <p>{"Fecha de compra: " + book.salesdata.selldate.split("T")[0]}</p>
                         </div>
 
                     </div>
