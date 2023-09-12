@@ -164,9 +164,9 @@ export default withPageAuthRequired(function Item(props) {
 
         if (usuariovendedor!= undefined && usuariovendedor !== null) {
             if (usuariovendedor.saldo >= precio) {
-                //setValues();
-                //setValuesComprador();
-                //setValuesVendedor();
+                setValues();
+                setValuesComprador();
+                setValuesVendedor();
                 success();
             }else {
                 errorMessage2();
