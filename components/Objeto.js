@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Select } from 'antd';
 import { Button } from 'antd';
-function Objeto({ books, itembookHistorial , comprar}) {
+function Objeto({ books, itembookHistorial, ...props}) {
     const [isDefined, setIsDefined] = useState(false)
     const [options, setOptions] = useState([])
     const [cantidad, setCantidad] = useState(0)
@@ -59,9 +59,10 @@ function Objeto({ books, itembookHistorial , comprar}) {
         }
     }, [books])
 
-
-
-
+ function comprar(){
+    props.setPrecio(precio)
+    props.setBookselected(bookselected)
+ }
 
     return (
         <>
@@ -94,7 +95,7 @@ function Objeto({ books, itembookHistorial , comprar}) {
                                 onChange={onChange}
                                 options={options}
                             />
-                                <Button type="primary" onClick={() => comprar(bookselected,comprobante,precio) }>Comprar</Button>
+                                <Button type="primary" onClick={() => comprar() }>Comprar</Button>
                         </div>
                     </div>
                 </div>

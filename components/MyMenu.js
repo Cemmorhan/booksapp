@@ -22,6 +22,15 @@ function MyMenu({ user }) {
             )
         }
     }
+    const saldo = () => {
+        if (user) {
+            return (
+                <div className="menu_item">
+                    {user.saldo} €
+                </div>
+            )
+        }
+    }
     return (
         <>
             <div className="menu">
@@ -35,22 +44,22 @@ function MyMenu({ user }) {
                             Home
                         </div>
                     </Link>
-                    <Link href="/perfil">
-                        <div className="menu_item">
-                            Perfil
-                        </div>
-                    </Link>
-
-                    <Link href="/sell">
-                        <div className="menu_item">
-                            Vender
-                        </div>
-                    </Link>
                     <Link href="/search">
                         <div className="menu_item">
                             Buscar
                         </div>
                     </Link>
+                    <Link href="/sell">
+                        <div className="menu_item">
+                            Vender
+                        </div>
+                    </Link>
+                    <Link href="/perfil">
+                        <div className="menu_item">
+                            Perfil
+                        </div>
+                    </Link>
+                    {saldo()}
                 </div>
             </div>
             <div className="menu_bottom">

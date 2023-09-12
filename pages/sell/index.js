@@ -79,7 +79,7 @@ export default withPageAuthRequired(function Sell(props) {
         console.log("selectedbokinsidegetbook", book)
         if (!book) return;
         const send = {
-            book_id: book.id,
+            book_id: book.book_id,
             title: book.title,
             author: book.author,
             language: book.language,

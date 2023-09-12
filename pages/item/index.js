@@ -1,21 +1,22 @@
 import Objeto from "../../components/Objeto";
 import Scroll from "../../components/Scroll";
-import { useEffect } from "react";
+import { use, useEffect } from "react";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { message } from 'antd';
 import { withPageAuthRequired, useUser } from '@auth0/nextjs-auth0/client';
 
 export default withPageAuthRequired(function Item(props) {
     const [renderizado, setRenderizado] = useState(false);
-    const { user, error, isLoading }= useUser();
+    const { user, error, isLoading } = useUser();
     const [itembook, setItembook] = useState([]);
     const [books, setBooks] = useState([]);
     const [isbn, setIsbn] = useState("0");
     const [itembookHistorial, setItembookHistorial] = useState([]);
     const [bookselected, setBookselected] = useState([]);
-    const [comprobante, setComprobante] = useState(false);
     const [precio, setPrecio] = useState(0);
     const [vendedor, setVendedor] = useState([]);
+    const [usuariovendedor, setUsuariovendedor] = useState([]);
     const router = useRouter();
 
     // fecha de compra
@@ -76,7 +77,7 @@ export default withPageAuthRequired(function Item(props) {
         if (isbn === "0") {
             return;
         }
-        const send = { isbn: isbn,state: "en venta"}
+        const send = { isbn: isbn, state: "en venta" }
         const results = await fetch("/api/gethistorial", {
             method: "POST",
             body: JSON.stringify(send),
@@ -106,6 +107,7 @@ export default withPageAuthRequired(function Item(props) {
             getUsers();
         }
     }, [renderizado]);
+
     // recuperar usuario vendedor
     const getVendedor = async () => {
         const send = { book_id: bookselected, state: "en venta" };
@@ -119,29 +121,61 @@ export default withPageAuthRequired(function Item(props) {
         console.log("vendedor", newResults);
         setVendedor(newResults);
     };
-
-    //recuperar libro seleccionado para compra
-    const recuperar = (bookselected, comprobante, precio) => {
-        setBookselected(bookselected);
-        setComprobante(comprobante);
-        setPrecio(precio);
+    // recuperar usuario vendedor
+    const getUsersVendedor = async () => {
+        if (!user) return;
+        const send = { user_id: vendedor[0].userSell.sub, user_email: vendedor[0].userSell.name };
+        const results = await fetch("/api/getuser", {
+            method: "POST",
+            body: JSON.stringify(send),
+        }).then((response) => response.json());
+        const newResults = results.map((result) => {
+            return { ...result }
+        }); console.log("usuariovendedor", newResults);
+        setUsuariovendedor(newResults[0]);
     };
 
+    //recuperar libro seleccionado para compra
+
+
     useEffect(() => {
-        if (comprobante && bookselected !== undefined ) {
-            getVendedor();
-            console.log("comprando", vendedor);
+        if (renderizado) {
+            if (bookselected !== undefined) {
+                getVendedor();
+            } else {
+                errorMessage1();
+            }
         }
-    }, [comprobante, bookselected]);
+    }, [ bookselected]);
+
     useEffect(() => {
+        if (renderizado){
         if (vendedor !== undefined && vendedor.length > 0 && vendedor[0].state === "en venta") {
-            console.log("if vendedor");
-                setValues();
-                setComprobante(false);
-                setValuesComprador();
-                setValuesVendedor();
-                }
-    }, [vendedor]);
+            getUsersVendedor();
+        }
+        else {
+            errorMessage3();
+        }}}
+    , [vendedor]);
+
+    useEffect(() => {
+        if(renderizado){
+        console.log("usuariovendedoren" + usuariovendedor.saldo + "es mayor que" + precio);
+
+        if (usuariovendedor!= undefined && usuariovendedor !== null) {
+            if (usuariovendedor.saldo >= precio) {
+                //setValues();
+                //setValuesComprador();
+                //setValuesVendedor();
+                success();
+            }else {
+                errorMessage2();
+            }
+        } else {
+            errorMessage3();
+        }}
+    }, [usuariovendedor]);
+
 
     // comprar libro
     const actualizarlibro = async (values) => {
@@ -163,13 +197,13 @@ export default withPageAuthRequired(function Item(props) {
 
     function setValues() {
         actualizarlibro({
-            set: {state: "vendido",salesdata: {userbuy: user, selldate: book_selldate, selldate2: book_selldate2}}
+            set: { state: "vendido", salesdata: { userbuy: user, selldate: book_selldate, selldate2: book_selldate2 } }
         });
     }
-    
+
 
     //descontar saldo
-    const actualizarusuario = async (values) => {
+    const actualizarUsuario = async (values) => {
         if (!user) return;
         const send = {
             user_id: user.sub,
@@ -184,16 +218,15 @@ export default withPageAuthRequired(function Item(props) {
         const newResults = results.map((result) => {
             return { ...result }
         });
-        props.setUsuarioAdquirido(newResults);
     };
 
     function setValuesComprador() {
-        actualizarusuario({
-            inc: {saldo: -precio}
+        actualizarUsuario({
+            inc: { saldo: -precio }
         });
     }
-     //aumentar saldo saldo
-     const actualizarusuariovendedor = async (values) => {
+    //aumentar saldo saldo
+    const actualizarUsuarioVendedor = async (values) => {
         if (!user) return;
         const send = {
             user_id: vendedor[0].userSell.sub,
@@ -208,21 +241,53 @@ export default withPageAuthRequired(function Item(props) {
         const newResults = results.map((result) => {
             return { ...result }
         });
-        props.setUsuarioAdquirido(newResults);
     };
 
     function setValuesVendedor() {
-        actualizarusuariovendedor({
-            inc: {saldo: precio}
+        actualizarUsuarioVendedor({
+            inc: { saldo: precio }
         });
     }
+    const [messageApi, contextHolder] = message.useMessage();
+    const success = () => {
+        messageApi.open({
+            type: 'success',
+            content: 'Compra realizada con éxito',
+        });
+    };
+    const errorMessage1 = () => {
+        messageApi.open({
+            type: 'error',
+            content: 'Seleccione un libro',
+        });
+    };
+    const errorMessage2 = () => {
+        messageApi.open({
+            type: 'error',
+            content: 'No tienes suficiente saldo suficiente',
+        });
+    };
+
+    const errorMessage3 = () => {
+        messageApi.open({
+            type: 'error',
+            content: 'No se pudo realizar la compra, el libro ya no se encuentra en venta',
+        });
+    };
+   
+    useEffect(() => {
+        setRenderizado(true);
+    }, []);
 
 
     return (
-        <div className="content">
-            {itembook.length > 0 ? <Objeto books={itembook} itembookHistorial={itembookHistorial} comprar={recuperar} /> : <h2>No se encuentra el libro</h2>}
-            <Scroll books={books} titulo='Vistos recientemente' />
-        </div>
+        <>
+            {contextHolder}
+            <div className="content">
+                {itembook.length > 0 ? <Objeto books={itembook} itembookHistorial={itembookHistorial} setBookselected={setBookselected} setPrecio={setPrecio}/> : <h2>No se encuentra el libro</h2>}
+                <Scroll books={books} titulo='Vistos recientemente' />
+            </div>
+        </>
 
 
     )

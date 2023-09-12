@@ -3,13 +3,20 @@ import { connectToDatabase } from "../../lib/mongodb"
 
 export default async function handler(request, response) {
 
+ 
+console.log("createbook");
     const { database } = await connectToDatabase()
     /* transform boy from json to object */
+    console.log(request);
     const body = JSON.parse(request.body);
+    console.log(body);
     if (body.book_id === undefined) {
         response.json([]);
         return;
     }
+
+    console.log(body);
+
     const book_id = body.book_id;
     const book_title = body.title;
     const book_author = body.author;

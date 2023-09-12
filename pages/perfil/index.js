@@ -24,6 +24,7 @@ export default withPageAuthRequired(function Perfil(props) {
                 <Descriptions title="User Info">
                     <Descriptions.Item ><img src={user.picture} alt=""></img></Descriptions.Item>
                     <Descriptions.Item label="Nombre de usuario">{props.usuarioAdquirido.nickname}</Descriptions.Item>
+                    <Descriptions.Item label="Saldo">{props.usuarioAdquirido.saldo}€ </Descriptions.Item>
                     <Descriptions.Item label="Nombre">{props.usuarioAdquirido.name} {props.usuarioAdquirido.lastname}  </Descriptions.Item>
                     <Descriptions.Item label="Correo">{props.usuarioAdquirido.email}</Descriptions.Item>
                     <Descriptions.Item label="Address">{props.usuarioAdquirido.address}  {props.usuarioAdquirido.zip}  {props.usuarioAdquirido.city}  {props.usuarioAdquirido.state}  {props.usuarioAdquirido.country}</Descriptions.Item>
@@ -218,11 +219,6 @@ export default withPageAuthRequired(function Perfil(props) {
             content: 'This is an error message',
         });
     };
-    function pruebas() {
-        console.log("usuario props" , props.usuarioAdquirido);
-        console.log ("historial del usuario" ,historial);
-        console.log("ventas del usuario", ventas);
-    }
 
 
 
@@ -398,7 +394,6 @@ export default withPageAuthRequired(function Perfil(props) {
 
 
             </div >
-            <button onClick={() => pruebas()}>pruebas</button>
         </>
     );
 });
