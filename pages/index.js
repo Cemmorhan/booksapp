@@ -61,11 +61,6 @@ export default function Home(props) {
       const books1 = result.filter((book) => book !== undefined);
       setBooksEnVenta(books1);
     }
-      // randomizar books (para mostrar libros aleatorios en la seccion de otros resultados)
-    if (booksEnVenta !== undefined && booksEnVenta.length > 0) {
-      const booksrandom = shuffle(booksEnVenta);
-      setBooksOtrosResultados(booksrandom); 
-    }
     //concatenar informacion del objeto booksEnVenta con el objeto bookhistorial (para mostrar los libros mas recientes)
     console.log("bookhistorial", bookhistorial)
     console.log("books", books)

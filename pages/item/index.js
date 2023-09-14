@@ -7,6 +7,8 @@ import { message } from 'antd';
 import { withPageAuthRequired, useUser } from '@auth0/nextjs-auth0/client';
 
 export default withPageAuthRequired(function Item(props) {
+    
+  const [booksOtrosResultados, setBooksOtrosResultados] = useState([]);
     const [renderizado, setRenderizado] = useState(false);
     const { user, error, isLoading } = useUser();
     const [itembook, setItembook] = useState([]);
@@ -286,6 +288,20 @@ export default withPageAuthRequired(function Item(props) {
     useEffect(() => {
         setRenderizado(true);
     }, []);
+       // metodo shuffle (randomizar array)
+       const shuffle = (array) => { 
+        return array.map((a) => ({ sort: Math.random(), value: a }))
+            .sort((a, b) => a.sort - b.sort)
+            .map((a) => a.value); 
+    }; 
+   
+    // randomizar books (para mostrar libros aleatorios en la seccion de otros resultados)
+  useEffect(() => {
+    if (books !== undefined && books.length > 0) {
+      const booksrandom = shuffle(books);
+      setBooksOtrosResultados(booksrandom); 
+    }
+  }, [books]);
 
 
     return (
@@ -293,7 +309,7 @@ export default withPageAuthRequired(function Item(props) {
             {contextHolder}
             <div className="content">
                 {itembook.length > 0 ? <Objeto books={itembook} itembookHistorial={itembookHistorial} setBookselected={setBookselected} setPrecio={setPrecio} /> : <h2>No se encuentra el libro</h2>}
-                <Scroll books={books} titulo='Vistos recientemente' />
+                <Scroll books={booksOtrosResultados} titulo='Vistos recientemente' />
             </div>
         </>
 
