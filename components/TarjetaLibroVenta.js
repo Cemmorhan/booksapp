@@ -9,10 +9,10 @@ function TarjetaLibroVenta({ book }) {
         if (book.isbn === undefined) {
             return;
         }
-        if (book.isbn  === "0") {
+        if (book.isbn === "0") {
             return;
         }
-        const send = { isbn: book.isbn  }
+        const send = { isbn: book.isbn }
         const results = await fetch("/api/getonebook", {
             method: "POST",
             body: JSON.stringify(send),
@@ -25,15 +25,14 @@ function TarjetaLibroVenta({ book }) {
 
     useEffect(() => {
         getonebookbyisbn();
-    }, [book.isbn ]);
+    }, [book.isbn]);
 
     useEffect(() => {
         console.log(itembook);
     }, [itembook]);
 
 
-    function showCard()
-    {
+    function showCard() {
         if (itembook === undefined) {
             return;
         }
@@ -41,31 +40,38 @@ function TarjetaLibroVenta({ book }) {
             return;
         }
         return (
-            <div className="card">
-                <div className="image_card">
-                    <img src={itembook.image.thumbnail !== undefined ? itembook.image.thumbnail : "Imagen"} className="card_img" alt='' />
-                </div>
-                <div className="datos_card">
-                    <div className="descripcion_card">
+            <div className="grid_card">
+                <div className="top-row">
+                    <div className="image_card">
+                        <img src={itembook.image.thumbnail !== undefined ? itembook.image.thumbnail : "Imagen"} className="card_img" alt='' />
+                    </div>
+                    <div className="datos_card">
+                        <div className="descripcion_card">
 
-                        <div className="titulo_card">
-                            {itembook.title}
-                        </div>
+                            <div className="titulo_card">
+                                {itembook.title}
+                            </div>
 
-                        <div className="data_card">
-                           <p>{itembook.author}</p> 
-                           <p>{"Precio de venta " + book.price + "€"}</p>
-                           <p>{"Estado: " + book.state}</p>
-                           <p>{"Fecha de subida: " + book.updatedate.split("T")[0]}</p>
-                           <b>Datos comprador</b>
-                           <p>{"Nombre: " + book.salesdata.userbuy.name + " " + book.salesdata.userbuy.lastname}</p>
-                           <p>{"Dirección: " + book.salesdata.userbuy.address}</p>
-                           <p>{"Ciudad: " + book.salesdata.userbuy.state}</p>
-                           <p>{"Código postal: " + book.salesdata.userbuy.zip}</p>
-                           <p>{"País: " + book.salesdata.userbuy.country}</p>
+                            <div className="data_card">
+                                <p>{itembook.author}</p>
+                                <p>{"Precio de venta " + book.price + "€"}</p>
+                                <p>{"Estado: " + book.state}</p>
+                                <p>{"Fecha de subida: " + book.updatedate.split("T")[0]}</p>
+
+                            </div>
+
                         </div>
 
                     </div>
+                </div>
+                <div className="buyer_card bottom-row">
+                    {book.salesdata && <>
+                        <b>Datos comprador</b>
+                        <p>{"Nombre: " + book.salesdata.userbuy.name + " " + book.salesdata.userbuy.lastname}</p>
+                        <p>{"Dirección: " + book.salesdata.userbuy.address}</p>
+                        <p>{"Ciudad: " + book.salesdata.userbuy.state}</p>
+                        <p>{"Código postal: " + book.salesdata.userbuy.zip}</p>
+                        <p>{"País: " + book.salesdata.userbuy.country}</p></>}
                 </div>
             </div>
         )
@@ -79,7 +85,7 @@ function TarjetaLibroVenta({ book }) {
                 query: { isbn: book.isbn }
             }}
         >
-           {   showCard()}
+            {showCard()}
         </Link>
 
 

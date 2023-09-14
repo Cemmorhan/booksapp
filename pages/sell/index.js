@@ -19,6 +19,7 @@ export default withPageAuthRequired(function Sell(props) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [book_price, setBook_price] = useState(0);
     const [comprobante, setComprobante] = useState(false);
+    const [seleccionado, setSeleccionado] = useState(false);
 
     const columns = [
         {
@@ -37,7 +38,7 @@ export default withPageAuthRequired(function Sell(props) {
     ];
     // fecha de puesta en venta
     const book_updatedate = new Date();
-    const book_updatedate2 =book_updatedate.getTime();
+    const book_updatedate2 = book_updatedate.getTime();
 
 
     // rowSelection object indicates the need for row selection
@@ -45,6 +46,8 @@ export default withPageAuthRequired(function Sell(props) {
 
         book,
         onChange: (selectedRowKeys, selectedRows) => {
+            
+        setSeleccionado(true)
             console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
             setBook(selectedRows[0]);
         },
@@ -182,10 +185,11 @@ export default withPageAuthRequired(function Sell(props) {
         <>
             {contextHolder}
             <div className="content">
-                <BuscadorApi setDatabooks={setDatabooks} setBooksMyDB={setBooksMyDB} />
-                <div className="results_books" style={{ padding: "10px 20px", width: "100%" }}>
+                <BuscadorApi setDatabooks={setDatabooks} setBooksMyDB={setBooksMyDB} setSeleccionado={setSeleccionado} />
+                <div className="results_books" >
 
                     {booksInTable.length > 0 ? <Table
+                        pagination={{ pageSize: 5 }}
 
                         style={{ width: "100%" }}
                         rowSelection={{
@@ -219,34 +223,34 @@ export default withPageAuthRequired(function Sell(props) {
                         }}
                     /> : null}
 
-                </div>
-                {databooks.length > 0 ? <div style={{ display: "flex", justifyContent: "right", alignItems: "center", flexDirection: "column" }}>
-                    <h4>
-                        ¿No encuentras el libro? Impórtalo de Google Books y añádelo a la biblioteca</h4>
-
-                    <Button type="primary" onClick={showMore} style={{ margin: "20px 0px" }}>
-                        Mostrar más
-                    </Button>
-                </div> : null}
-
-                <div style={{ display: "flex", justifyContent: "right", alignItems: "center" }}>
-                    <Button type="primary" onClick={Venta}>
+                    <Button type="primary" disabled={!seleccionado} onClick={Venta} style={{maxWidth:"500px", width:"100%"}} >
                         Vender
                     </Button>
                 </div>
+                <div className='showbuttons'>
+                    {/* databooks.length */ true > 0 ? <><h4>
+                        ¿No encuentras el libro? Impórtalo de Google Books y añádelo a la biblioteca</h4>
+
+                        <Button type="default" onClick={showMore} >
+                            Buscar más
+                        </Button></>
+
+                        : null}
+
+                </div>
             </div>
-            
+
             <Modal title="Es este tu libro? Véndelo!"
-                    open={isModalOpen}
-                    onOk={handleOk}
-                    onCancel={handleCancel}
-                    footer={null}
+                open={isModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                footer={null}
 
 
-                    width={800}
-                >
-                    {modaldata}
-                </Modal>
+                width={800}
+            >
+                {modaldata}
+            </Modal>
         </>
 
 

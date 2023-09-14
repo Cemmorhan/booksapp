@@ -4,7 +4,7 @@ import { Tabs } from 'antd';
 import { Descriptions } from 'antd';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import {Button,Form,Input,Modal,message} from 'antd';
+import { Button, Form, Input, Modal, message } from 'antd';
 import TarjetaLibroVenta from '@/components/TarjetaLibroVenta';
 import TarjetaLibroCompra from '@/components/TarjetaLibroCompra';
 
@@ -16,36 +16,11 @@ export default withPageAuthRequired(function Perfil(props) {
     const [historial, setHistorial] = useState([]);
     const [ventas, setVentas] = useState([]);
     const [compras, setCompras] = useState([]);
-    const items = [
-        {
-            key: '1',
-            label: `Perfil`,
-            children:
-                <Descriptions title="User Info">
-                    <Descriptions.Item ><img src={user.picture} alt=""></img></Descriptions.Item>
-                    <Descriptions.Item label="Nombre de usuario">{props.usuarioAdquirido.nickname}</Descriptions.Item>
-                    <Descriptions.Item label="Saldo">{props.usuarioAdquirido.saldo}€ </Descriptions.Item>
-                    <Descriptions.Item label="Nombre">{props.usuarioAdquirido.name} {props.usuarioAdquirido.lastname}  </Descriptions.Item>
-                    <Descriptions.Item label="Correo">{props.usuarioAdquirido.email}</Descriptions.Item>
-                    <Descriptions.Item label="Address">{props.usuarioAdquirido.address}  {props.usuarioAdquirido.zip}  {props.usuarioAdquirido.city}  {props.usuarioAdquirido.state}  {props.usuarioAdquirido.country}</Descriptions.Item>
-                </Descriptions>
-            ,
-        },
-        {
-            key: '2',
-            label: `Compras`,
-            children: printCompras()
-        },
-        {
-            key: '3',
-            label: `Ventas`,
-            children: printHistorial()
-       },
-    ];
+    
     //metodo get para recuperar el historial
     const getHistorial = async () => {
         if (!user) return;
-        const send = { user_id: user.sub};
+        const send = { user_id: user.sub };
         const results = await fetch("/api/getlibrosuser", {
             method: "POST",
             body: JSON.stringify(send),
@@ -55,10 +30,10 @@ export default withPageAuthRequired(function Perfil(props) {
         });
         setHistorial(newResults);
     };
-     //metodo get para recuperar el historial
-     const getHistorialcompras = async () => {
+    //metodo get para recuperar el historial
+    const getHistorialcompras = async () => {
         if (!user) return;
-        const send = { user_id: user.sub};
+        const send = { user_id: user.sub };
         const results = await fetch("/api/getlibrosusercompras", {
             method: "POST",
             body: JSON.stringify(send),
@@ -102,7 +77,7 @@ export default withPageAuthRequired(function Perfil(props) {
         props.setUsuarioAdquirido(newResults);
     };
 
-    function printHistorial() {
+    function printVentas() {
         if (historial === undefined) {
             return (null
             )
@@ -114,7 +89,7 @@ export default withPageAuthRequired(function Perfil(props) {
                     <div className='card_container'>
                         {historial.map((book, index) => {
                             return (
-                                <TarjetaLibroVenta book={book} key={index}/>
+                                <TarjetaLibroVenta book={book} key={index} />
                             )
                         })}
                     </div>
@@ -135,7 +110,7 @@ export default withPageAuthRequired(function Perfil(props) {
                     <div className='card_container'>
                         {compras.map((book, index) => {
                             return (
-                                <TarjetaLibroCompra book={book} key={index}/>
+                                <TarjetaLibroCompra book={book} key={index} />
                             )
                         })}
                     </div>
@@ -156,9 +131,10 @@ export default withPageAuthRequired(function Perfil(props) {
         setRenderizado(true);
     }, []);
 
-    
 
-    useEffect(() => {setIsModalOpen
+
+    useEffect(() => {
+        setIsModalOpen
         if (renderizado) {
             getUsers();
             if (user !== undefined) {
@@ -220,7 +196,37 @@ export default withPageAuthRequired(function Perfil(props) {
         });
     };
 
+    const items = [
+        {
+            key: '1',
+            label: `Perfil`,
+            children: <>
+                <Descriptions title="User Info">
+                    <Descriptions.Item label="Nombre de usuario">{props.usuarioAdquirido.nickname}</Descriptions.Item>
+                    <Descriptions.Item label="Saldo">{props.usuarioAdquirido.saldo}€ </Descriptions.Item>
+                    <Descriptions.Item label="Nombre">{props.usuarioAdquirido.name} {props.usuarioAdquirido.lastname}  </Descriptions.Item>
+                    <Descriptions.Item label="Correo">{props.usuarioAdquirido.email}</Descriptions.Item>
+                    <Descriptions.Item label="Address">{props.usuarioAdquirido.address}  {props.usuarioAdquirido.zip}  {props.usuarioAdquirido.city}  {props.usuarioAdquirido.state}  {props.usuarioAdquirido.country}</Descriptions.Item>
+                </Descriptions>
+                <div className='tabsbotton'>
+                    <Button type="primary" onClick={showModal}>
+                        Editar perfil      </Button>
+                </div>
+            </>
 
+            ,
+        },
+        {
+            key: '2',
+            label: `Compras`,
+            children: printCompras()
+        },
+        {
+            key: '3',
+            label: `Ventas`,
+            children: printVentas()
+        },
+    ];
 
     return (
         <>
@@ -228,13 +234,8 @@ export default withPageAuthRequired(function Perfil(props) {
             <div className="content">
                 <div className="tabsperfil">
                     <Tabs defaultActiveKey="1" items={items} size="large" />
-                    <div className='tabsbotton'>
-                        <Button type="primary" onClick={showModal}>
-                            Editar perfil      </Button>
-                    </div>
+
                 </div>
-                <button onClick={setSaldo}>Subir saldo</button>
-                <br></br>
                 <Modal title="Editar perfil"
                     open={isModalOpen}
                     onOk={handleOk}

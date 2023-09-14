@@ -86,7 +86,7 @@ function Buscador(props) {
         <>
             <div className="buscadorApi">
                 <div className="buscadorApi_titulo">
-                    <h3>¡¡Busca el libro que quieras comprar!!</h3>
+                    <h3>¡Encuentra el libro que buscas!</h3>
                 </div>
 
                 <div className='buscadorApi_input'>
@@ -113,8 +113,8 @@ function Buscador(props) {
                         ]}
                     />
 
-                    <div className="search" style={{ width: "80px" }} onClick={buscar}>
-                        <FiSearch size={30} color='white' />
+                    <div className="search"  onClick={buscar}>
+                            <FiSearch size={20} color='white' />
                     </div>
                 </div>
                 {printBooksMyDB()}

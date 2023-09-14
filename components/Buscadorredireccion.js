@@ -24,7 +24,7 @@ function Buscadorredireccion(props) {
         <>
             <div className="buscadorApi">
                 <div className="buscadorApi_titulo">
-                    <h3>¡¡Encuentra el libro que buscas!!</h3>
+                    <h3>¡Encuentra el libro que buscas!</h3>
                 </div>
 
                 <div className='buscadorApi_input'>
@@ -51,14 +51,14 @@ function Buscadorredireccion(props) {
                         ]}
                     />
 
-                    <div className="search" style={{ width: "80px" }} onClick={buscar}>
+                    <div className="search" onClick={buscar}>
                         <Link
                             href={{
                                 pathname: "/search",
                                 query: { value: value, type: type}
                             }}
                         >
-                            <FiSearch size={30} color='white' />
+                            <FiSearch size={20} color='white' />
                         </Link>
 
                     </div>

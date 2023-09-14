@@ -66,9 +66,8 @@ function Objeto({ books, itembookHistorial, ...props}) {
 
     return (
         <>
-            <div className="content_item">
                 <div className="ficha_item">
-                    <div className="imagen_item" style={{ objectFit: "scale-down" }}>
+                    <div className="imagen_item" >
                         <img src={isDefined && books[0].image.thumbnail != undefined ? books[0].image.thumbnail : "Imagen"} className="caratula_img" alt='' />
                     </div>
                     <div className="datos_item">
@@ -99,7 +98,6 @@ function Objeto({ books, itembookHistorial, ...props}) {
                         </div>
                     </div>
                 </div>
-            </div>
         </>
         )
 }

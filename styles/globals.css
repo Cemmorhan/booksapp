@@ -162,7 +162,7 @@ a {
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 10px 10px 10px 10px;
+  padding: 10px 20px;
 }
 
 .footer {
@@ -199,12 +199,11 @@ a {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 40px;
-  min-height: 40px;
-  border-radius: 10px;
+  width: 60px;
+  height: 30px;
+  border-radius: 5px;
   gap: 20px;
-  padding: 10px 20px;
+  background-color: rgb(181, 181, 181);
 }
 
 .search:hover {
@@ -227,8 +226,8 @@ a {
   width: 100%;
   overflow-x: scroll;
   overflow-y: hidden;
-  padding: 10px;
-  gap: 30px;
+  padding: 20px 0px;
+  gap: 20px;
 }
 
 .caratulas {
@@ -240,8 +239,8 @@ a {
 
 .caratula {
   width: 0px;
-  height: 280px;
-  min-width: 200px;
+  height: 200px;
+  min-width: 160px;
 }
 
 .caratula_img {
@@ -335,6 +334,8 @@ a {
   width: 300px;
   gap: 10px;
   padding: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .datos_item {
@@ -356,6 +357,7 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
@@ -430,13 +432,13 @@ a {
   align-items: center;
   width: 100%;
   gap: 20px;
-  padding: 10px 20px;
+  padding: 10px;
 }
 .buscadorApi_input{
   display: flex;
   width: 100%;
-  gap: 20px;
-  padding: 10px 20px;
+  gap: 10px;
+  padding: 8px 10px;
   border: solid 1px rgb(126, 126, 126);
   border-radius:  10px;
   justify-content: center;
@@ -451,7 +453,7 @@ a {
 } */
 
 .card_container{
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr;
   display: grid;
   grid-gap: 10px;
   padding: 10px;
@@ -473,6 +475,8 @@ a {
 
 .image_card{
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card_img{
@@ -484,7 +488,7 @@ a {
   flex-direction: column;
   width: 100%;
   gap: 10px;
-  padding: 10px;
+  padding: 0 10px;
 }
 .descripcion_card{
   display: flex;
@@ -496,7 +500,6 @@ a {
 .titulo_card{
   display: flex;
   width: 100%;
-  font-size: larger;
   font-weight: bolder;
 }
 
@@ -514,6 +517,57 @@ a {
       gap: 20px;
 
 }
+
+.showbuttons{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 10px 20px;
+}
+
+.results_books{
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  width: 100%;
+  align-items: center;
+}
+
+
+.caratula_img {
+  width: 120px !important;
+  height: 200px !important;
+  object-fit: fill !important;
+}
+/* .grid_card is a container of a grid with 2 rows, the first one with 2 columns and the second one with 1 column */
+
+.grid_card{    
+  display: flex;
+  
+  width: 100%;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid rgb(126, 126, 126);
+  border-radius: 10px;
+  min-width: 300px;
+
+}
+
+
+.top-row {
+  grid-row: 1; /* Primera fila */
+  display: grid;
+  grid-template-columns: auto auto; /* Dos columnas en la primera fila */
+  gap: 10px; /* Espacio entre elementos */
+}
+
+.bottom-row {
+  grid-row: 2; /* Segunda fila */
+}
+
 
 @media (prefers-color-scheme: dark) {
   html {
@@ -566,5 +620,50 @@ a {
     height: 160px;
     min-width: 95px;
   }
+  .results_books{
+    padding: 10px 0px;
+  }
+  .ant-table-cell{
+    font-size: small !important;
+    padding: 8px !important;
+  }
+
+  .caratula_img {
+    width: 120px !important;
+    height: 200px !important;
+    object-fit: fill !important;
+  }
+  .titulo_card{
+    font-size: small;
+  }
+  .data_card{
+    font-size:small;
+  }
+
+  .grid_card{    
+    display: grid;
+    grid-template-rows: auto auto; /* Dos filas */
+    grid-template-columns: auto auto; /* Dos columnas en la primera fila */
+    
+    width: 100%;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid rgb(126, 126, 126);
+    border-radius: 10px;
+    min-width: 300px;
+  
+  }
+
+  .top-row {
+    grid-row: 1; /* Primera fila */
+    display: grid;
+    grid-template-columns: auto auto; /* Dos columnas en la primera fila */
+    gap: 10px; /* Espacio entre elementos */
+  }
+  
+  .bottom-row {
+    grid-row: 2; /* Segunda fila */
+  }
+  
 
 }

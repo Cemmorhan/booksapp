@@ -26,8 +26,11 @@ export default function Search() {
     }, [value, type]);
     return (
         <>
-            {renderizado&&<Buscador value={value} type={type} />}
-            
+
+            <div className="content">
+                {renderizado && <Buscador value={value} type={type} />}
+                </div>
+
         </>
 
     )
