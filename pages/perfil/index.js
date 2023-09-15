@@ -186,13 +186,13 @@ export default withPageAuthRequired(function Perfil(props) {
     const successMessage = () => {
         messageApi.open({
             type: 'success',
-            content: 'This is a success message',
+            content: 'Su perfil se ha actualizado correctamente',
         });
     };
     const errorMessage = () => {
         messageApi.open({
             type: 'error',
-            content: 'This is an error message',
+            content: 'Rellene correctamente los espacios señalados en rojo',
         });
     };
 
