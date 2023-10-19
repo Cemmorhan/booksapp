@@ -75,7 +75,7 @@ export default withPageAuthRequired(function Sell(props) {
             setIsModalOpen(false);
             setComprobante(false);
         }
-    }, [comprobante, book_price]);
+    }, [comprobante, book_price]); 
 
     // Guardar libros mongo
     const getBook = async () => {
